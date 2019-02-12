@@ -13,6 +13,17 @@ app.get("/", (req, res) => {
   res.send("Hello and Good Day!");
 });
 
+app.get("/urls/:shortURL", (req, res) => {
+  console.log("HERE");
+  let templateVars = {
+    shortURL: req.params.shortURL,
+    longURL: urlDatabase[req.params.shortURL]
+  };
+  console.log("Test");
+  // let longURL = urlDatabase[];
+  res.render("urls_show", templateVars);
+});
+
 app.get("/urls", (req, res) => {
   let templateVars = { urls: urlDatabase };
   res.render("urls_index", templateVars);
