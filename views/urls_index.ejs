@@ -28,19 +28,18 @@
           <h2>URLs Page</h2>
           <a href="#">Create New TinyURL</a>
           <br />
-          <ul>
+          <ul class="url_list">
             <% for (let key in urls) { %>
-                <li>
-                  <div class="url">
+                <li class="url">
+                  <!-- <div class="url"> -->
                     <span>ShortURL: </span>
                     <span class="url_string"><a href="#"><%= key %></a></span>
                     <span> for LongURL: </span>
                     <span class="url_string"><a href="#"><%= urls[key] %> </a></span>
                     <div class="url__btns">
-                      <a href="#">Edit</a>
-                      <a href="#">Delete</a>
+                      <a href="#">Edit</a> | <a href="#">Delete</a>
                     </div>
-                  </div>
+                  <!-- </div> -->
                 </li>
             <% } %>
           </ul>
