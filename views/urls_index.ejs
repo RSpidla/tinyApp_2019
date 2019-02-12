@@ -1,62 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>TinyApp</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+  <meta charset="utf-8">
+  <title>TinyApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 
-    <!-- Primary CSS -->	
-    <link href="https://raymondspidla.ca/public/layouts.css" rel="stylesheet">
+  <!-- Primary CSS -->	
+  <link href="https://raymondspidla.ca/public/layouts.css" rel="stylesheet">
 
-  </head>
-  <body class="primary primary--full-width">
+</head>
+<body class="primary primary--full-width">
 
-    <header class="primary__header">
-      <a href="/" class="logo">TinyApp</a>
-    </header> <!-- /.primary__header -->
+  <header class="primary__header">
+    <a href="/" class="logo">TinyApp</a>
+  </header> <!-- /.primary__header -->
 
-    <main class="primary__main">
+  <main class="primary__main">
 
-      <% include partials/_header.ejs %>
+    <% include partials/_header.ejs %>
 
-        <section>
-            
-          <h2>URLs Page</h2>
-          <a href="#">Create New TinyURL</a>
-          <br />
-          <ul class="url_list">
-            <% for (let key in urls) { %>
-                <li class="url">
-                  <!-- <div class="url"> -->
-                    <span>ShortURL: </span>
-                    <span class="url_string"><a href="#"><%= key %></a></span>
-                    <span> for LongURL: </span>
-                    <span class="url_string"><a href="#"><%= urls[key] %> </a></span>
-                    <div class="url__btns">
-                      <a href="#">Edit</a> | <a href="#">Delete</a>
-                    </div>
-                  <!-- </div> -->
-                </li>
-            <% } %>
-          </ul>
+      <section>
+          
+        <h2>URLs Page</h2>
+        <a href="#">Create New TinyURL</a>
+        <br />
+        <ul class="url_list">
+          <% for (let key in urls) { %>
+              <li class="url">
+                <span>ShortURL: </span>
+                <span class="url_string"><a href="#"><%= key %></a></span>
+                <span> for LongURL: </span>
+                <span class="url_string"><a href="#"><%= urls[key] %> </a></span>
+                <div class="url__btns">
+                  <a href="#">Edit</a> | <a href="#">Delete</a>
+                </div>
+              </li>
+          <% } %>
+        </ul>
 
-        </section>
+      </section>
 
-    </main> <!-- /.primary__main -->
+  </main> <!-- /.primary__main -->
 
-    <footer class="primary__footer">
+  <footer class="primary__footer">
 
-      <div class="copyright">
-        2019 <a href="/">Lighthouse Labs</a>, Calgary Canada
-      </div>
+    <div class="copyright">
+      2019 <a href="/">Lighthouse Labs</a>, Calgary Canada
+    </div>
 
-    </footer> <!-- /.primary__footer -->
+  </footer> <!-- /.primary__footer -->
 
-  </body>
-
-
+</body>
 </html>
