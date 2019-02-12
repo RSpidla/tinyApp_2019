@@ -21,24 +21,28 @@
 
     <main class="primary__main">
 
-        <h1>TinyApp - Template</h1>
+      <% include partials/_header.ejs %>
 
         <section>
             
-          <h2>List of Short URLS</h2>
+          <h2>URLs Page</h2>
+          <a href="#">Create New TinyURL</a>
+          <br />
           <ul>
-            <li>
-              <div class="url">
-                <span>Short URL:</span>
-                <span class="url_string"><a href="#">https://css-tricks.com/bem-101/</a></span>
-                <span>Long URL:</span>
-                <span class="url_string"><a href="#">https://css-tricks.com/bem-101/</a></span>
-                <div class="url__btns">
-                  <a href="#">Edit</a>
-                  <a href="#">Delete</a>
-                </div>
-              </div>
-            </li>
+            <% for (let key in urls) { %>
+                <li>
+                  <div class="url">
+                    <span>ShortURL: </span>
+                    <span class="url_string"><a href="#"><%= key %></a></span>
+                    <span> for LongURL: </span>
+                    <span class="url_string"><a href="#"><%= urls[key] %> </a></span>
+                    <div class="url__btns">
+                      <a href="#">Edit</a>
+                      <a href="#">Delete</a>
+                    </div>
+                  </div>
+                </li>
+            <% } %>
           </ul>
 
         </section>
