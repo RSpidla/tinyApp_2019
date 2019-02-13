@@ -29,17 +29,25 @@
         <p><a href="/urls/new" class="link">Create New TinyURL</a></p>
 
         <ul class="url_list">
+            
           <% for (let key in urls) { %>
-              <li class="url">
-                <span>ShortURL: </span>
-                <span class="url_string"><a href="<%= urls[key] %>" target="blank"><%= key %></a></span>
-                <span> for LongURL: </span>
-                <span class="url_string"><a href="<%= urls[key] %>" target="blank"><%= urls[key] %> </a></span>
-                <div class="url__btns">
-                  <a href="#">Edit</a> | <a href="#">Delete</a>
-                </div>
-              </li>
+            <li class="url">
+              <!-- <%= urls[key].longURL; %> -->
+
+              <span>ShortURL: </span>
+              <span class="url_string"><a href="<%= urls[key] %>" target="blank"><%= key %></a></span>
+              <span> for LongURL: </span>
+              <span class="url_string"><a href="<%= urls[key] %>" target="blank"><%= urls[key] %> </a></span>
+              <!-- <div class="url__btns">
+                <a href="#">Edit</a> | <a href="#">Delete</a>
+              </div> -->
+              <!-- <a href="#" class="edit">Edit</a> -->
+              <form method="POST" action="/urls/<%= key %>/delete">
+                <input type="submit" value="Delete URL" class="btn">
+              </form>
+            </li>
           <% } %>
+
         </ul>
 
       </section>

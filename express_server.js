@@ -29,7 +29,13 @@ app.get("/urls/new", (req, res) => {
   res.render("urls_new", templateVars);
 })
 
-// Short URL Route ===============================
+// Short URL Requests Route ===============================
+app.get("/u/:shortURL", (req, res) => {
+  let longURL = req.params['shortURL'];
+  res.status(302).redirect(urlDatabase[longURL]);
+})
+
+// Single and Shortened URL Route ===============================
 app.get("/urls/:shortURL", (req, res) => {
   let templateVars = {
     shortURL: req.params.shortURL,
@@ -43,6 +49,7 @@ app.get("/urls/:shortURL", (req, res) => {
 app.get("/urls", (req, res) => {
   let templateVars = { urls: urlDatabase };
   res.render("urls_index", templateVars);
+  console.log(urlDatabase);
 });
 
 // URLs Route ===============================
@@ -55,6 +62,13 @@ app.get("/hello", (req, res) => {
 });
 
 // POST Route Handlers ===============================
+
+// Delete URL Route ===============================
+app.post('/urls/:id/delete', (req, res) => {
+  delete urlDatabase[req.params.id];
+  res.redirect('/urls');
+})
+
 
 // URLs Route ===============================
 app.post("/urls", (req, res) => {
