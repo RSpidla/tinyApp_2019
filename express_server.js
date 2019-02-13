@@ -56,7 +56,7 @@ app.post("/urls", (req, res) => {
   let rng = generateRandomString();
   urlDatabase[rng] = req.body.longURL;
   console.log(req.body.longURL);
-  res.status(302).redirect(`/urls/${rng}`);
+  res.status(200).redirect(`/urls/${rng}`);
 });
 
 // URLs Route ===============================
