@@ -26,17 +26,15 @@
       <section>
           
         <h3>URL Page</h3>
-        <a href="/urls/new">Create New TinyURL</a>
-        <br />
-        <ul class="url">
-          <li>
+        <p><a href="/urls/new" class="link">Create New TinyURL</a></p>
+        <ul class="url_list">
+          <li class="url">
             <span>Short URL:</span>
             <span class="url_string"><a href="#"><%= shortURL %></a></span>
             <span>Long URL:</span>
             <span class="url_string"><a href="<%= longURL %>"><%= longURL %></a></span>
             <div class="url__btns">
-                <a href="#">Edit</a>
-                <a href="#">Delete</a>
+                <a href="#">Edit</a> | <a href="#">Delete</a>
             </div>
           </li>
         </ul>

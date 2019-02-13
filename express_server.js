@@ -22,15 +22,20 @@ app.get("/", (req, res) => {
 
 // New URL Route ===============================
 app.get("/urls/new", (req, res) => {
-  res.render("urls_new");
+  let longURL = req.params['shortURL'];
+    let templateVars = { 
+        longURL
+    };
+  res.render("urls_new", templateVars);
 })
 
 // Short URL Route ===============================
 app.get("/urls/:shortURL", (req, res) => {
   let templateVars = {
     shortURL: req.params.shortURL,
-    longURL: urlDatabase[req.params.shortURL].longURL
+    longURL: urlDatabase.longURL
   };
+  console.log(req.params.shortURL);
   res.render("urls_show", templateVars);
 });
 
@@ -55,7 +60,9 @@ app.get("/hello", (req, res) => {
 app.post("/urls", (req, res) => {
   let rng = generateRandomString();
   urlDatabase[rng] = req.body.longURL;
-  console.log(req.body.longURL);
+  
+
+  // console.log(req.body.longURL);
   res.status(200).redirect(`/urls/${rng}`);
 });
 
