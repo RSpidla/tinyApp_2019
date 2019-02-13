@@ -9,12 +9,8 @@
   <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 
-  <!-- Primary CSS -->	
+  <!-- CSS -->	
   <link href="https://raymondspidla.ca/public/layouts.css" rel="stylesheet">
-
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
 
 </head>
 <body class="primary primary--full-width">
@@ -29,12 +25,12 @@
 
       <section>
           
-        <h2>Create TinyURL Page</h2>
+        <h3>Create New URL</h3>
 
         <form class="form-inline" action="/urls" method="POST">
           <div class="form-group mb-2">
             <label for="longURL">Enter a URL:</label>
-            <input class="form-control" type="text" name="longURL" placeholder="http://" style="width: 300px; margin: 1em;">
+            <input class="form-control" type="text" name="longURL" placeholder="http://">
             <button type="submit" class="btn btn-primary">Submit</button>
           </div>
         </form>

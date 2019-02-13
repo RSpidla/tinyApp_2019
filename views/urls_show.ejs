@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 
-  <!-- Primary CSS -->	
+  <!-- CSS -->	
   <link href="https://raymondspidla.ca/public/layouts.css" rel="stylesheet">
 
 </head>
@@ -25,19 +25,19 @@
 
       <section>
           
-        <h2>URL Page</h2>
-        <a href="#">Create New TinyURL</a>
+        <h3>URL Page</h3>
+        <a href="/urls/new">Create New TinyURL</a>
         <br />
-        <ul>
-          <li class="url">
-          <span>Short URL:</span>
-          <span class="url_string"><a href="#"><%= shortURL %></a></span>
-          <span>Long URL:</span>
-          <span class="url_string"><a href="<%= longURL %>"><%= longURL %></a></span>
-          <div class="url__btns">
-              <a href="#">Edit</a>
-              <a href="#">Delete</a>
-          </div>
+        <ul class="url">
+          <li>
+            <span>Short URL:</span>
+            <span class="url_string"><a href="#"><%= shortURL %></a></span>
+            <span>Long URL:</span>
+            <span class="url_string"><a href="<%= longURL %>"><%= longURL %></a></span>
+            <div class="url__btns">
+                <a href="#">Edit</a>
+                <a href="#">Delete</a>
+            </div>
           </li>
         </ul>
 
