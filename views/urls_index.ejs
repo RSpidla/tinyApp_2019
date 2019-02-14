@@ -32,19 +32,20 @@
             
           <% for (let key in urls) { %>
             <li class="url">
-              <!-- <%= urls[key].longURL; %> -->
-
               <span>ShortURL: </span>
               <span class="url_string"><a href="<%= urls[key] %>" target="blank"><%= key %></a></span>
               <span> for LongURL: </span>
               <span class="url_string"><a href="<%= urls[key] %>" target="blank"><%= urls[key] %> </a></span>
-              <!-- <div class="url__btns">
-                <a href="#">Edit</a> | <a href="#">Delete</a>
-              </div> -->
-              <!-- <a href="#" class="edit">Edit</a> -->
-              <form method="POST" action="/urls/<%= key %>/delete">
-                <input type="submit" value="Delete URL" class="btn">
-              </form>
+              <div class="url__btns">
+                <form method="POST" action="/urls/<%= key %>/edit">
+                  <input type="submit" value="Edit" class="btn reset">
+                </form>
+                
+                <form method="POST" action="/urls/<%= key %>/delete">
+                  <input type="submit" value="Delete" class="btn reset">
+                </form>
+              </div>
+            
             </li>
           <% } %>
 
