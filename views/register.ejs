@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>TinyApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+
+  <!-- CSS -->	
+  <link href="https://raymondspidla.ca/public/layouts.css" rel="stylesheet">
+
+</head>
+<body class="primary primary--full-width">
+
+  <% include partials/_header.ejs %>
+
+  <main class="primary__main">
+
+    <section>
+        
+      <h3>Register Page</h3>
+      
+      <form method="POST" action="/register">
+                
+        <label for="email">Email:</label>
+        <input type="email" name="email" placeholder="Enter Email" />
+
+        <label for="password">Password: </label>
+        <input type="password" name="password" placeholder="Enter Password" />
+        
+        <input type="submit" value="Register" class="btn" />
+        
+      </form>
+
+    </section>
+
+  </main> <!-- /.primary__main -->
+
+  <footer class="primary__footer">
+
+    <div class="copyright">
+      2019 <a href="/">Lighthouse Labs</a>, Calgary Canada
+    </div>
+
+  </footer> <!-- /.primary__footer -->
+
+</body>
+</html>
