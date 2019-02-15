@@ -18,14 +18,20 @@
   <% include partials/_header.ejs %>
 
   <main class="primary__main">
-
-    <section>
         
-      <h3>Login Page</h3>
-      <p><a href="/urls/new" class="link">Create New TinyURL</a></p>
+    <h1>Login:</h1>
 
+    <form method="POST" action="/login">
+        
+      <label for="email">Email:</label>
+      <input type="email" name="email" placeholder="Enter Email" />
 
-    </section>
+      <label for="password">Password: </label>
+      <input type="password" name="password" placeholder="Enter Password" />
+      
+      <input type="submit" value="Login" class="btn" />
+        
+    </form>
 
   </main> <!-- /.primary__main -->
 

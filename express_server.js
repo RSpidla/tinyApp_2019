@@ -39,10 +39,13 @@ app.get("/", (req, res) => {
 
 // New URL Route ===============================
 app.get("/urls/new", (req, res) => {
+  // let user_id = req.session.user_id;
+  let user_id = req.cookies['user_id'];
+  let user = users[user_id];
   let longURL = req.params['shortURL'];
     let templateVars = { 
-      username: req.cookies["username"],  
-      longURL
+      longURL,
+      user
     };
   res.render("urls_new", templateVars);
 })
@@ -55,19 +58,33 @@ app.get("/u/:shortURL", (req, res) => {
 
 // Single and Shortened URL Route ===============================
 app.get("/urls/:shortURL", (req, res) => {
+  // let user_id = req.session.user_id;
+  // let user_id = req.cookies['user_id'];
+  let user_id = req.cookies['user_id'];
+  let user = users[user_id];
   let templateVars = {
-    username: req.cookies["username"],
     shortURL: req.params.shortURL,
-    longURL: urlDatabase[req.params.shortURL]
+    longURL: urlDatabase[req.params.shortURL],
+    user
   };
   res.render("urls_show", templateVars);
 });
 
 // URLs Route ===============================
 app.get("/urls", (req, res) => {
+  // let templateVars = { 
+  //   username: req.cookies["username"],
+  //   urls: urlDatabase 
+  // };
+  let user_id = req.cookies['user_id'];
+  // let user = req.session['user_id'];
+  // let user_id = req.session.user_id;
+  let user = users[user_id];
   let templateVars = { 
-    username: req.cookies["username"],
-    urls: urlDatabase 
+    // urls: urlDatabase,
+    // users,
+    user
+    // usersURLS
   };
   res.render("urls_index", templateVars);
 });
@@ -103,10 +120,10 @@ app.get('/register', (req, res) => {
 
 // Login ===============================
 app.get('/login', (req, res) => {
-  let templateVars = {
-    username: req.cookies["username"]
-  }
-  res.render("login", templateVars);
+  // let templateVars = {
+  //   username: req.cookies["username"]
+  // }
+  res.render("login");
 });
 
 
@@ -132,6 +149,7 @@ app.post('/login', (req, res) => {
 
 // Logout Route ===============================
 app.post('/logout', (req, res) => {
+  // req.session['user_id'] = null;
   res.clearCookie('username', { path: '/' });
   res.status(200).redirect('/urls');
 });
@@ -163,7 +181,8 @@ app.post('/register', (req, res) => {
   }
   else {
     users[user_id] = user;
-    req.session['user_id'] = user_id;
+    // req.session['user_id'] = user_id;
+    res.cookie('user_id', user_id);
     req.status(200).redirect('urls');
     // req.status(201).redirect('urls');
   };
