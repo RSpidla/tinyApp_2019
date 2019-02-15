@@ -45,8 +45,6 @@ app.get("/urls/:shortURL", (req, res) => {
     shortURL: req.params.shortURL,
     longURL: urlDatabase[req.params.shortURL]
   };
-  console.log(req.cookies["username"]);
-  console.log(templateVars);
   res.render("urls_show", templateVars);
 });
 
@@ -57,7 +55,6 @@ app.get("/urls", (req, res) => {
     urls: urlDatabase 
   };
   res.render("urls_index", templateVars);
-  console.log(req.cookies);
 });
 
 // URLs Route ===============================
@@ -69,15 +66,12 @@ app.get("/urls.json", (req, res) => {
 //   res.send("<html><body>Hello <b>World</b></body></html>\n");
 // });
 
-
 // Login ===============================
 app.get('/login', (req, res) => {
   let templateVars = {
     username: req.cookies["username"]
   }
-  console.log(req);
   res.render("login", templateVars);
-
 });
 
 
@@ -103,19 +97,9 @@ app.post('/login', (req, res) => {
 
 // Logout Route ===============================
 app.post('/logout', (req, res) => {
-  // res.clearCookie('username', req.body.username);
   res.clearCookie('username', { path: '/' });
   res.status(200).redirect('/urls');
 });
-
-
-
-
-
-
-
-
-
 
 // URLs Route ===============================
 app.post("/urls", (req, res) => {
@@ -124,7 +108,7 @@ app.post("/urls", (req, res) => {
   res.status(302).redirect(`/urls/${rng}`);
 });
 
-// URLs Route ===============================
+// App Start Message Route ===============================
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });
@@ -136,7 +120,7 @@ function generateRandomString() {
   var result = '';
   var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   for (var i = 6; i > 0; --i) {
-      result += chars[Math.floor(Math.random() * chars.length)];
+    result += chars[Math.floor(Math.random() * chars.length)];
   }
   return result;
 };
