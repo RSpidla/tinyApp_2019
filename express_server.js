@@ -1,9 +1,11 @@
 const express = require("express");
+const cookieParser = require('cookie-parser');
 const app = express();
 const PORT = 8080;
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(cookieParser());
 
 app.set("view engine", "ejs");
 
@@ -24,7 +26,8 @@ app.get("/", (req, res) => {
 app.get("/urls/new", (req, res) => {
   let longURL = req.params['shortURL'];
     let templateVars = { 
-        longURL
+      username: req.cookies["username"],  
+      longURL
     };
   res.render("urls_new", templateVars);
 })
@@ -38,18 +41,23 @@ app.get("/u/:shortURL", (req, res) => {
 // Single and Shortened URL Route ===============================
 app.get("/urls/:shortURL", (req, res) => {
   let templateVars = {
+    username: req.cookies["username"],
     shortURL: req.params.shortURL,
     longURL: urlDatabase[req.params.shortURL]
   };
-  // console.log(req.params.shortURL);
+  console.log(req.cookies["username"]);
+  console.log(templateVars);
   res.render("urls_show", templateVars);
 });
 
 // URLs Route ===============================
 app.get("/urls", (req, res) => {
-  let templateVars = { urls: urlDatabase };
+  let templateVars = { 
+    username: req.cookies["username"],
+    urls: urlDatabase 
+  };
   res.render("urls_index", templateVars);
-  // console.log(urlDatabase);
+  console.log(req.cookies);
 });
 
 // URLs Route ===============================
@@ -57,9 +65,21 @@ app.get("/urls.json", (req, res) => {
   res.json(urlDatabase);
 });
 
-app.get("/hello", (req, res) => {
-  res.send("<html><body>Hello <b>World</b></body></html>\n");
+// app.get("/hello", (req, res) => {
+//   res.send("<html><body>Hello <b>World</b></body></html>\n");
+// });
+
+
+// Login ===============================
+app.get('/login', (req, res) => {
+  let templateVars = {
+    username: req.cookies["username"]
+  }
+  console.log(req);
+  res.render("login", templateVars);
+
 });
+
 
 // POST Route Handlers ===============================
 
@@ -71,12 +91,28 @@ app.post('/urls/:id/delete', (req, res) => {
 
 // Update URL Route ===============================
 app.post('/urls/:id/edit', (req, res) => {
-//  console.log(urlDatabase);
-  
   urlDatabase[req.params.id] = req.body.updatedLongURL;
-  // urlDatabase.longURL = res.body[updatedLongURL];
   res.redirect('/urls');
 })
+
+// Login Route ===============================
+app.post('/login', (req, res) => {
+  res.cookie('username', req.body.username);
+  res.redirect('/urls');
+})
+
+// Logout Route ===============================
+app.post('/logout', (req, res) => {
+  // res.clearCookie('username', req.body.username);
+  res.clearCookie('username', { path: '/' });
+  res.status(200).redirect('/urls');
+});
+
+
+
+
+
+
 
 
 

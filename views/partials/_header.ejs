@@ -1,1 +1,21 @@
-<h1>TinyApp - Template</h1>
+<header class="primary__header">
+
+    <a href="/" class="logo">TinyApp</a>
+    
+    <div class="header_form">
+
+      <% if (username) { %>
+        <h1>Logged-in as <%= username %></h1>
+        <form method="POST" action="/logout" class="logout_form">
+          <input type="submit" value="Logout" />  
+        </form> 
+        <%} else {%> 
+        <form method="POST" action="/login" class="login_form">
+          <input type="text" name="username"  placeholder="Enter username"/>
+          <input type="submit" value="Login" /> 
+        </form>  
+      <% } %>
+
+  </div>
+
+</header> <!-- /.primary__header -->
