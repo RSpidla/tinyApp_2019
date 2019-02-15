@@ -123,7 +123,12 @@ app.get('/login', (req, res) => {
   // let templateVars = {
   //   username: req.cookies["username"]
   // }
-  res.render("login");
+  let user_id = req.cookies['user_id'];
+  let user = users[user_id];
+  let templateVars = {
+    user
+  }
+  res.render("login", templateVars);
 });
 
 
