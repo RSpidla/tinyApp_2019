@@ -15,43 +15,39 @@
 </head>
 <body class="primary primary--full-width">
 
-  <header class="primary__header">
-    <a href="/" class="logo">TinyApp</a>
-  </header> <!-- /.primary__header -->
+  <% include partials/_header.ejs %>
 
   <main class="primary__main">
 
-    <% include partials/_header.ejs %>
+    <section>
+        
+      <h3>URLs Page</h3>
+      <p><a href="/urls/new" class="link">Create New TinyURL</a></p>
 
-      <section>
+      <ul class="url_list">
           
-        <h3>URLs Page</h3>
-        <p><a href="/urls/new" class="link">Create New TinyURL</a></p>
+        <% for (let key in urls) { %>
+          <li class="url">
+            <span>ShortURL: </span>
+            <span class="url_string"><a href="<%= urls[key] %>" target="blank"><%= key %></a></span>
+            <span> for LongURL: </span>
+            <span class="url_string"><a href="<%= urls[key] %>" target="blank"><%= urls[key] %> </a></span>
+            <div class="url__btns">
+              <form method="POST" action="/urls/<%= key %>/edit">
+                <input type="submit" value="Edit" class="btn reset">
+              </form>
+              
+              <form method="POST" action="/urls/<%= key %>/delete">
+                <input type="submit" value="Delete" class="btn reset">
+              </form>
+            </div>
+          
+          </li>
+        <% } %>
 
-        <ul class="url_list">
-            
-          <% for (let key in urls) { %>
-            <li class="url">
-              <span>ShortURL: </span>
-              <span class="url_string"><a href="<%= urls[key] %>" target="blank"><%= key %></a></span>
-              <span> for LongURL: </span>
-              <span class="url_string"><a href="<%= urls[key] %>" target="blank"><%= urls[key] %> </a></span>
-              <div class="url__btns">
-                <form method="POST" action="/urls/<%= key %>/edit">
-                  <input type="submit" value="Edit" class="btn reset">
-                </form>
-                
-                <form method="POST" action="/urls/<%= key %>/delete">
-                  <input type="submit" value="Delete" class="btn reset">
-                </form>
-              </div>
-            
-            </li>
-          <% } %>
+      </ul>
 
-        </ul>
-
-      </section>
+    </section>
 
   </main> <!-- /.primary__main -->
 

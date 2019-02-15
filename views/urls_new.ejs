@@ -15,27 +15,23 @@
 </head>
 <body class="primary primary--full-width">
 
-  <header class="primary__header">
-    <a href="/" class="logo">TinyApp</a>
-  </header> <!-- /.primary__header -->
+  <% include partials/_header.ejs %>
 
   <main class="primary__main">
 
-    <% include partials/_header.ejs %>
+    <section>
+        
+      <h3>Create New URL</h3>
 
-      <section>
-          
-        <h3>Create New URL</h3>
+      <form class="form-inline" action="/urls" method="POST">
+        <div class="form-group mb-2">
+          <label for="longURL">Enter a URL:</label>
+          <input class="form-control" type="text" name="longURL" placeholder="http://">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
 
-        <form class="form-inline" action="/urls" method="POST">
-          <div class="form-group mb-2">
-            <label for="longURL">Enter a URL:</label>
-            <input class="form-control" type="text" name="longURL" placeholder="http://">
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </form>
-
-      </section>
+    </section>
 
   </main> <!-- /.primary__main -->
 
