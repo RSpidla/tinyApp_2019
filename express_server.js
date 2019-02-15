@@ -9,11 +9,26 @@ app.use(cookieParser());
 
 app.set("view engine", "ejs");
 
-// Database ===============================
+// URLs Database ===============================
 var urlDatabase = {
   "b2xVn2": "http://www.lighthouselabs.ca",
   "9sm5xK": "http://www.google.com"
 };
+
+// Users Database ===============================
+const users = { 
+  "userRandomID": {
+    id: "userRandomID", 
+    email: "user@example.com", 
+    password: "purple-monkey-dinosaur"
+  },
+ "user2RandomID": {
+    id: "user2RandomID", 
+    email: "user2@example.com", 
+    password: "dishwasher-funk"
+  }
+}
+
 
 // GET Route Handlers ===============================
 
@@ -68,8 +83,24 @@ app.get("/urls.json", (req, res) => {
 
 
 app.get('/register', (req, res) => {
-  res.render("register");
+  let templateVars = {
+    username: req.cookies["username"]
+  }
+  res.render("register", templateVars);
 });
+
+
+
+// app.get('/register', (req, res) => {
+//   const currentUser_id = req.session.user_id;
+//   if (users[currentUser_id]) {
+//       return res.redirect('/urls');
+//   }
+//   res.render("register");
+// });
+
+
+
 // Login ===============================
 app.get('/login', (req, res) => {
   let templateVars = {
@@ -104,6 +135,24 @@ app.post('/logout', (req, res) => {
   res.clearCookie('username', { path: '/' });
   res.status(200).redirect('/urls');
 });
+
+// Register Route ===============================
+app.post('/register', (req, res) => {
+  const { email, password } = req.body;
+  const rng = generateRandomString();
+  const user_id = rng;
+  const user = { user_id, email, password };
+  console.log(user);
+  console.log('user_id: ' + user_id);
+  console.log('email: ' + email);
+  console.log('password: ' + password);
+  res.cookie('user_id', user_id);
+  res.status(200).redirect('/urls');
+});
+
+
+
+
 
 // URLs Route ===============================
 app.post("/urls", (req, res) => {
