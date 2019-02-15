@@ -142,12 +142,32 @@ app.post('/register', (req, res) => {
   const rng = generateRandomString();
   const user_id = rng;
   const user = { user_id, email, password };
-  console.log(user);
-  console.log('user_id: ' + user_id);
-  console.log('email: ' + email);
-  console.log('password: ' + password);
+  // console.log(user);
+  // console.log('user_id: ' + user_id);
+  // console.log('email: ' + email);
+  // console.log('password: ' + password);
   res.cookie('user_id', user_id);
-  res.status(200).redirect('/urls');
+
+  if (user.email === "" || user.password === "") {
+    res.status(400).send("Status: 400 Bad Request - Enter Email and Password");
+  }
+
+  let isFound = false;
+  for (let key in users) {
+    if (users[key].email === email) {
+      isFound = true;
+    }
+  } 
+  if (isFound === true) {
+    res.status(400).send("Status: 400 Bad Request - Email Already Registered");
+  }
+  else {
+    users[user_id] = user;
+    req.session['user_id'] = user_id;
+    req.status(200).redirect('urls');
+    // req.status(201).redirect('urls');
+  };
+
 });
 
 
