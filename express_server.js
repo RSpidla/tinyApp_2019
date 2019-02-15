@@ -66,6 +66,10 @@ app.get("/urls.json", (req, res) => {
 //   res.send("<html><body>Hello <b>World</b></body></html>\n");
 // });
 
+
+app.get('/register', (req, res) => {
+  res.render("register");
+});
 // Login ===============================
 app.get('/login', (req, res) => {
   let templateVars = {
