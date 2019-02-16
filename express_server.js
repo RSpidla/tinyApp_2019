@@ -12,11 +12,26 @@ app.use('/images', express.static(__dirname + '/images'));
 
 app.set("view engine", "ejs");
 
-// Database ===============================
+// URLs Database ===============================
 var urlDatabase = {
   "b2xVn2": "http://www.lighthouselabs.ca",
   "9sm5xK": "http://www.google.com"
 };
+
+// Users Database ===============================
+const users = { 
+  "userRandomID": {
+    id: "userRandomID", 
+    email: "user@example.com", 
+    password: "purple-monkey-dinosaur"
+  },
+ "user2RandomID": {
+    id: "user2RandomID", 
+    email: "user2@example.com", 
+    password: "dishwasher-funk"
+  }
+}
+
 
 // GET Route Handlers ===============================
 
@@ -27,10 +42,12 @@ app.get("/", (req, res) => {
 
 // New URL Route ===============================
 app.get("/urls/new", (req, res) => {
+  let user_id = req.cookies['user_id'];
+  let user = users[user_id];
   let longURL = req.params['shortURL'];
     let templateVars = { 
-      username: req.cookies["username"],  
-      longURL
+      longURL,
+      user
     };
   res.render("urls_new", templateVars);
 })
@@ -43,19 +60,23 @@ app.get("/u/:shortURL", (req, res) => {
 
 // Single and Shortened URL Route ===============================
 app.get("/urls/:shortURL", (req, res) => {
+  let user_id = req.cookies['user_id'];
+  let user = users[user_id];
   let templateVars = {
-    username: req.cookies["username"],
     shortURL: req.params.shortURL,
-    longURL: urlDatabase[req.params.shortURL]
+    longURL: urlDatabase[req.params.shortURL],
+    user
   };
   res.render("urls_show", templateVars);
 });
 
 // URLs Route ===============================
 app.get("/urls", (req, res) => {
+  let user_id = req.cookies['user_id'];
+  let user = users[user_id];
   let templateVars = { 
-    username: req.cookies["username"],
-    urls: urlDatabase 
+    urls: urlDatabase,
+    user
   };
   res.render("urls_index", templateVars);
 });
@@ -69,10 +90,22 @@ app.get("/urls.json", (req, res) => {
 //   res.send("<html><body>Hello <b>World</b></body></html>\n");
 // });
 
+
+app.get('/register', (req, res) => {
+  let user_id = req.cookies['user_id'];
+  let user = users[user_id];
+  let templateVars = {
+    user    
+  }
+  res.render("register", templateVars);
+});
+
 // Login ===============================
 app.get('/login', (req, res) => {
+  let user_id = req.cookies['user_id'];
+  let user = users[user_id];
   let templateVars = {
-    username: req.cookies["username"]
+    user
   }
   res.render("login", templateVars);
 });
@@ -94,14 +127,52 @@ app.post('/urls/:id/edit', (req, res) => {
 
 // Login Route ===============================
 app.post('/login', (req, res) => {
-  res.cookie('username', req.body.username);
-  res.redirect('/urls');
-})
+  const { email, password } = req.body;
+  const user = { email, password };
+  let user_id;
+  for (let key in users) {
+    if (users[key].email === email && users[key].password === password) {
+      user_id = key;
+    }
+  }
+  if (user.email === "" || user.password === "") {
+    res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong> - Enter Email and Password</body></html>\n");
+  } else if (user_id) {
+    res.cookie('user_id', user_id);
+    res.status(200).redirect('/urls');
+  } else {
+    res.status(403).send("<html><body><strong>Status: 403 Forbidden</strong> - Invalid Username or Password</body></html>\n");
+  }
+});
 
 // Logout Route ===============================
 app.post('/logout', (req, res) => {
-  res.clearCookie('username', { path: '/' });
+  res.clearCookie('user_id', { path: '/' });
   res.status(200).redirect('/urls');
+});
+
+// Register Route ===============================
+app.post('/register', (req, res) => {
+  const { email, password } = req.body;
+  const rng = generateRandomString();
+  const user_id = rng;
+  const user = { user_id, email, password };
+  res.cookie('user_id', user_id);
+  let isFound = false;
+  for (let key in users) {
+    if (users[key].email === email) {
+      isFound = true;
+    }
+  }
+  if (user.email === "" || user.password === "") {
+    res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong> - Enter Email and Password</html></body>");
+  } else if (isFound === true) {
+    res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong> - Email Already Registered</body></html>");
+  } else {
+    users[user_id] = user;
+    res.cookie('user_id', user_id);
+    res.status(200).redirect('urls');
+  }
 });
 
 // URLs Route ===============================

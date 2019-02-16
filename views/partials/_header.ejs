@@ -2,20 +2,22 @@
 
     <a href="/urls" class="logo">TinyApp</a>
     
+<<<<<<< HEAD
     <div class="header-form">
+=======
+    <% if (user) { %>
+>>>>>>> feature/user-registration
 
-      <% if (username) { %>
-        <h1>Logged-in as <%= username %></h1>
-        <form method="POST" action="/logout" class="logout_form">
-          <input type="submit" value="Logout" />  
-        </form> 
-        <%} else {%> 
-        <form method="POST" action="/login" class="login_form">
-          <input type="text" name="username"  placeholder="Enter username"/>
-          <input type="submit" value="Login" /> 
-        </form>  
-      <% } %>
-
-  </div>
+      <p class="lgd_in_msg">Logged-in as <%= user.email %></p>
+      
+      <form method="POST" action="/logout" class="logout_form">
+          <input type="submit" value="Logout" class="logout_form_submit"/>  
+      </form> 
+      
+      <%} else {%> 
+          
+      <p class="lgd_in_msg"><a href="/login">Login</a> | <a href="/register">Register</a> </p>  
+          
+    <% } %>
 
 </header> <!-- /.primary__header -->
