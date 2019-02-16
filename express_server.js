@@ -39,7 +39,6 @@ app.get("/", (req, res) => {
 
 // New URL Route ===============================
 app.get("/urls/new", (req, res) => {
-  // let user_id = req.session.user_id;
   let user_id = req.cookies['user_id'];
   let user = users[user_id];
   let longURL = req.params['shortURL'];
@@ -58,8 +57,6 @@ app.get("/u/:shortURL", (req, res) => {
 
 // Single and Shortened URL Route ===============================
 app.get("/urls/:shortURL", (req, res) => {
-  // let user_id = req.session.user_id;
-  // let user_id = req.cookies['user_id'];
   let user_id = req.cookies['user_id'];
   let user = users[user_id];
   let templateVars = {
@@ -72,19 +69,11 @@ app.get("/urls/:shortURL", (req, res) => {
 
 // URLs Route ===============================
 app.get("/urls", (req, res) => {
-  // let templateVars = { 
-  //   username: req.cookies["username"],
-  //   urls: urlDatabase 
-  // };
   let user_id = req.cookies['user_id'];
-  // let user = req.session['user_id'];
-  // let user_id = req.session.user_id;
   let user = users[user_id];
   let templateVars = { 
-    // urls: urlDatabase,
-    // users,
+    urls: urlDatabase,
     user
-    // usersURLS
   };
   res.render("urls_index", templateVars);
 });
@@ -103,29 +92,13 @@ app.get('/register', (req, res) => {
   let user_id = req.cookies['user_id'];
   let user = users[user_id];
   let templateVars = {
-    username: req.cookies["username"],
     user    
   }
   res.render("register", templateVars);
 });
 
-
-
-// app.get('/register', (req, res) => {
-//   const currentUser_id = req.session.user_id;
-//   if (users[currentUser_id]) {
-//       return res.redirect('/urls');
-//   }
-//   res.render("register");
-// });
-
-
-
 // Login ===============================
 app.get('/login', (req, res) => {
-  // let templateVars = {
-  //   username: req.cookies["username"]
-  // }
   let user_id = req.cookies['user_id'];
   let user = users[user_id];
   let templateVars = {
@@ -151,37 +124,27 @@ app.post('/urls/:id/edit', (req, res) => {
 
 // Login Route ===============================
 app.post('/login', (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  
-  
-let user;
-
-  let isFound = false;
+  const { email, password } = req.body;
+  const user = { email, password };
+  let user_id;
   for (let key in users) {
-    if (users[key].email === email) {
-      isFound = true;
+    if (users[key].email === email && users[key].password === password) {
+      user_id = key;
     }
-  } 
-  if (isFound === true) {
-    res.status(400).send("Status: 400 Bad Request - Email Already Registered");
   }
-  else {
-    users[user_id] = user;
-    // req.session['user_id'] = user_id;
+  if (user.email === "" || user.password === "") {
+    res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong> - Enter Email and Password</body></html>\n");
+  } else if (user_id) {
     res.cookie('user_id', user_id);
-    req.status(200).redirect('urls');
-    // req.status(201).redirect('urls');
-  };
-  
-  // res.cookie('username', req.body.username);
-  // res.redirect('/urls');
-})
+    res.status(200).redirect('/urls');
+  } else {
+    res.status(403).send("<html><body><strong>Status: 403 Forbidden</strong> - Invalid Username or Password</body></html>\n");
+  }
+});
 
 // Logout Route ===============================
 app.post('/logout', (req, res) => {
-  // req.session['user_id'] = null;
-  res.clearCookie('username', { path: '/' });
+  res.clearCookie('user_id', { path: '/' });
   res.status(200).redirect('/urls');
 });
 
@@ -191,38 +154,23 @@ app.post('/register', (req, res) => {
   const rng = generateRandomString();
   const user_id = rng;
   const user = { user_id, email, password };
-  // console.log(user);
-  // console.log('user_id: ' + user_id);
-  // console.log('email: ' + email);
-  // console.log('password: ' + password);
   res.cookie('user_id', user_id);
-
-  if (user.email === "" || user.password === "") {
-    res.status(400).send("Status: 400 Bad Request - Enter Email and Password");
-  }
-
   let isFound = false;
   for (let key in users) {
     if (users[key].email === email) {
       isFound = true;
     }
-  } 
-  if (isFound === true) {
-    res.status(400).send("Status: 400 Bad Request - Email Already Registered");
   }
-  else {
+  if (user.email === "" || user.password === "") {
+    res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong> - Enter Email and Password</html></body>");
+  } else if (isFound === true) {
+    res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong> - Email Already Registered</body></html>");
+  } else {
     users[user_id] = user;
-    // req.session['user_id'] = user_id;
     res.cookie('user_id', user_id);
-    req.status(200).redirect('urls');
-    // req.status(201).redirect('urls');
-  };
-
+    res.status(200).redirect('urls');
+  }
 });
-
-
-
-
 
 // URLs Route ===============================
 app.post("/urls", (req, res) => {
