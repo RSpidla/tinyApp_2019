@@ -9,8 +9,8 @@
   <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 
-  <!-- CSS -->	
-  <link href="https://raymondspidla.ca/public/layouts.css" rel="stylesheet">
+  <!-- App CSS -->	
+  <link rel="stylesheet" href="/styles/app.css" type="text/css" />
 
 </head>
 <body class="primary primary--full-width">
@@ -21,26 +21,30 @@
 
       <section>
           
-        <h3>URL Page</h3>
+        <h3>Single and Shortened URL Page</h3>
         <p><a href="/urls/new" class="link">Create New TinyURL</a></p>
+        
         <ul class="url_list">
-          <li class="url">
-            <span>Short URL:</span>
-            <span class="url_string"><a href="#"><%= shortURL %></a></span>
-            <span>Long URL:</span>
-            <span class="url_string"><a href="<%= longURL %>"><%= longURL %></a></span>
-            <!-- <div class="url__btns">
-                <a href="#">Edit</a> | <a href="#">Delete</a>
-            </div> -->
+          
+          <li class="url_list__url">
+
+            <div class="shortURL">
+              <span>Short URL:</span>
+              <span class="url_string"><a href="#"><%= shortURL %></a></span>
+            </div>
+
+            <div class="longURL">
+              <span>Long URL:</span>
+              <span class="url_string"><a href="<%= longURL %>"><%= longURL %></a></span>
+            </div>
 
             <form method="POST" action="/urls/<%= shortURL %>/edit">
               <input type="text" name="updatedLongURL" placeholder="Enter new URL">
               <input type="submit" value="Update URL" class="btn">
             </form>
 
-
-
           </li>
+
         </ul>
 
       </section>

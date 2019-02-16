@@ -9,8 +9,8 @@
   <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 
-  <!-- CSS -->	
-  <link href="https://raymondspidla.ca/public/layouts.css" rel="stylesheet">
+  <!-- App CSS -->	
+  <link rel="stylesheet" href="/styles/app.css" type="text/css" />
 
 </head>
 <body class="primary primary--full-width">
@@ -22,16 +22,22 @@
     <section>
         
       <h3>URLs Page</h3>
+      
       <p><a href="/urls/new" class="link">Create New TinyURL</a></p>
 
       <ul class="url_list">
           
         <% for (let key in urls) { %>
-          <li class="url">
-            <span>ShortURL: </span>
-            <span class="url_string"><a href="<%= urls[key] %>" target="blank"><%= key %></a></span>
-            <span> for LongURL: </span>
-            <span class="url_string"><a href="<%= urls[key] %>" target="blank"><%= urls[key] %> </a></span>
+          <li class="url_list__url">
+            
+            <div class="shortURL">
+              <span>ShortURL: </span><a href="<%= urls[key] %>" target="blank"><%= key %></a>
+            </div>
+            
+            <div class="longURL">
+              <span>LongURL: </span><a href="<%= urls[key] %>" target="blank"><%= urls[key] %> </a>
+            </div>
+            
             <div class="url__btns">
               <form method="POST" action="/urls/<%= key %>/edit">
                 <input type="submit" value="Edit" class="btn reset">
