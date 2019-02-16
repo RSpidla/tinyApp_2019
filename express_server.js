@@ -7,6 +7,9 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 
+app.use(express.static("public"));
+app.use('/images', express.static(__dirname + '/images'));
+
 app.set("view engine", "ejs");
 
 // Database ===============================
