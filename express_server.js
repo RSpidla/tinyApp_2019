@@ -100,8 +100,11 @@ app.get("/urls.json", (req, res) => {
 
 
 app.get('/register', (req, res) => {
+  let user_id = req.cookies['user_id'];
+  let user = users[user_id];
   let templateVars = {
-    username: req.cookies["username"]
+    username: req.cookies["username"],
+    user    
   }
   res.render("register", templateVars);
 });
@@ -148,8 +151,31 @@ app.post('/urls/:id/edit', (req, res) => {
 
 // Login Route ===============================
 app.post('/login', (req, res) => {
-  res.cookie('username', req.body.username);
-  res.redirect('/urls');
+  const email = req.body.email;
+  const password = req.body.password;
+  
+  
+let user;
+
+  let isFound = false;
+  for (let key in users) {
+    if (users[key].email === email) {
+      isFound = true;
+    }
+  } 
+  if (isFound === true) {
+    res.status(400).send("Status: 400 Bad Request - Email Already Registered");
+  }
+  else {
+    users[user_id] = user;
+    // req.session['user_id'] = user_id;
+    res.cookie('user_id', user_id);
+    req.status(200).redirect('urls');
+    // req.status(201).redirect('urls');
+  };
+  
+  // res.cookie('username', req.body.username);
+  // res.redirect('/urls');
 })
 
 // Logout Route ===============================
