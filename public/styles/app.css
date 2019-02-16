@@ -370,7 +370,7 @@ a:focus.edit {
 .logout_form input[type=submit] {
   display: inline-block;
   width: 100%;
-  padding: 10px;
+  padding: 5px 10px;
   color: #263238;
   font: normal 500 14px/1.26em "Oswald", Arial, sans-serif;
   text-transform: uppercase;
