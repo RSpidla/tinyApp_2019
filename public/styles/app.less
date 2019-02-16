@@ -1,0 +1,692 @@
+
+/*
+
+Description:    CSS for Tweeter Project V1.0
+Date Created:   18/11/05
+Date Updated:   18/11/06
+
+00. Mixins
+01. Variables
+02. Reset
+03. Layout
+04. Typography
+05. Header
+06. Footer
+07. 
+08. 
+09. Button
+10. 
+
+*/
+
+
+
+
+/* ==========================================================================
+00. Mixins
+========================================================================== */
+@import "mixins.less";
+
+/* ==========================================================================
+01. Variables \ Brand Primary Colour
+========================================================================== */
+@color-primary-0: #E0245D;
+@color-primary-1: #EE7298;
+@color-primary-2: #E74979;
+@color-primary-3: #C0053E;
+@color-primary-4: #97002E;
+
+/* ==========================================================================
+01. Variables \ Brand Secondary Colour (1)
+========================================================================== */
+@color-secondary-1-0: #FB6428;
+@color-secondary-1-1: #FFA07A;
+@color-secondary-1-2: #FF8251;
+@color-secondary-1-3: #D74106;
+@color-secondary-1-4: #A93000;
+
+/* ==========================================================================
+01. Variables \ Brand Secondary Colour (2)
+========================================================================== */
+@color-secondary-2-0: #A31AA3;
+@color-secondary-2-1: #C75FC7;
+@color-secondary-2-2: #B038B0;
+@color-secondary-2-3: #8C048C;
+@color-secondary-2-4: #6E006E;
+
+/* ==========================================================================
+01. Variables \ Brand UI Colours
+========================================================================== */
+@color-grey-1: #263238;
+@color-grey-2: #78868D;
+@color-grey-3: #5A6D76;
+@color-grey-4: #A3ACB0;
+@color-grey-5: #D4D7D9;
+
+@color-grey-6: #333333;
+@color-grey-7: #888888;
+@color-grey-8: #F4F4F4;
+@color-grey-9: #F7F7F7;
+@color-grey-10: #D4D7D9;
+
+/* ==========================================================================
+01. Variables \ Brand Fonts
+========================================================================== */
+@sans-serif-primary: "Oswald", Arial, sans-serif;
+@serif-primary: "Merriweather", serif;
+
+/* ============================================================================= 
+02. HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/
+================================================================================ */
+html,
+button,
+input,
+select,
+textarea {
+	color: @color-grey-1;
+}
+html {
+	font-size: 100%;
+	line-height: 1.4em;
+}
+::-moz-selection {
+	background: #b3d4fc;
+	text-shadow: none;
+}
+::selection {
+	background: #b3d4fc;
+	text-shadow: none;
+}
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid white;
+	margin: 40px 0 20px;
+	padding: 0;
+}
+audio,
+canvas,
+img,
+video {
+	vertical-align: middle;
+}
+fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+textarea {
+	resize: vertical;
+}
+
+body.primary {
+	margin: 0 !important;
+}
+
+/* ============================================================================= 
+03. Layout
+================================================================================ */
+.primary__header { grid-area: header; }
+.primary__footer { grid-area: footer; }
+.primary__main { grid-area: main; }
+.primary {
+  display: grid;
+  grid-template-areas: "header"
+  "main"
+  "footer";
+  grid-template-columns: 100%;
+  grid-template-rows: 60px 
+  1fr
+  60px;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+	// background: #f7f7f7;
+	
+	// min-height: 100vh;
+	// padding: 0;
+	// margin: 0 !important;
+	// background: url("https://raymondspidla.ca/public/duotone-tiny-app.jpg");
+	// background-size: cover;
+	// background-repeat: no-repeat;
+	// background-position: 50% 50%;
+}
+.primary__main { 
+  margin: 60px 40px; 
+}
+
+/* ============================================================================= 
+03. Layout \ Media Queries
+================================================================================ */
+@media only screen and (min-width: 800px) and (max-width: 1279px) {
+  .primary__main { 
+    margin: 40px; 
+  }
+}
+@media only screen and (max-width: 799px) {
+  .primary__main { 
+    margin: 40px 20px; 
+  }
+}
+@media only screen and (max-width: 379px) {
+  .primary__main { 
+    margin: 20px 20px 40px; 
+  }
+}
+
+/* ============================================================================= 
+04. Typography
+================================================================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: @sans-serif-primary;  
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.0125em;
+}
+h1, h2, h3 {
+  font-weight: 500;
+  text-transform: uppercase;
+}
+h1 {
+  display: block;
+  margin: 20px 0;
+  font-size: 36px;
+  line-height: 1.136em;
+}
+h2 {
+  margin: 40px 0 20px;
+  font-size: 32px;
+  line-height: 1.136em;
+}
+h3 {
+  margin: 40px 0 20px;
+  font-size: 24px;
+  line-height: 1.136em;
+}
+p {
+  margin: 0 0 20px;
+  font-size: 24px;
+  line-height: 1.5em;
+}
+strong {
+  font-weight: 400;
+}
+em {
+  font-style: normal;
+  font-weight: 400;
+}
+ul {
+  list-style-type: none;
+}
+a {
+  .transition;
+}
+a:link,
+a:visited {
+	color:@color-grey-1;  
+	text-decoration: none;
+}
+a:hover,
+a:focus {
+	color: @color-grey-4;  
+	text-decoration: none;
+}
+a:link.edit,
+a:visited.edit {
+	color: white;  
+	text-decoration: none;
+	.transition;
+}
+a:hover.edit,
+a:focus.edit {
+	color: @color-grey-4;  
+	text-decoration: none;
+}
+
+/* ============================================================================= 
+04. Typography \ Media Queries
+================================================================================ */
+@media only screen and (min-width: 800px) and (max-width: 1279px) {
+  h1 {
+    font-size: 28px;
+  }
+  h2 {
+    font-size: 24px;
+  }
+  h3 {
+    font-size: 20px;
+  }
+  p, ul, ol {
+    font-size: 18px;
+  }
+}
+@media only screen and (min-width: 380px) and (max-width: 799px) {
+  h1 {
+    font-size: 24px;
+  }
+  h2 {
+    font-size: 24px;
+  }
+  h3 {
+    font-size: 20px;
+  }
+  p, ul, ol {
+    font-size: 18px;
+  }
+}
+@media only screen and (max-width: 379px) {
+  h1 {
+    font-size: 20px;
+  }
+  h2 {
+    font-size: 22px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+  p,
+  ul,
+  ol {
+    font-size: 16px;
+  }
+}
+
+/* ============================================================================= 
+05. Header
+================================================================================ */
+.primary__header {
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  -webkit-box-shadow: 1px 2px 4px 0 rgba(0,0,0,.15);
+	box-shadow: 1px 2px 4px 0 rgba(0,0,0,.15);
+	
+	.header-form {
+		display: inline-block;
+		width: 50%;
+
+	}
+}
+.primary__header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: white;
+}
+.primary__header li {
+  float: left;
+}
+.primary__header li a {
+  display: block;
+  padding: 20px;
+  border-right: 1px solid #f4f4f4;
+  border-bottom: none;
+  color: @color-grey-1;
+  font: 500 14px/20px @sans-serif-primary;  
+  text-decoration: none;
+  text-transform: uppercase;
+  .transition;            
+}
+.primary__header li a:hover,
+.primary__header .menu-btn:hover,
+.primary__header li a:focus,
+.primary__header .menu-btn:hover {
+  background-color: #f4f4f4;
+  color: @color-secondary-1-0;
+}
+.primary__header .logo {
+  display: block;
+  float: left;
+  padding: 20px;
+  border-bottom: none;
+  font: 500 14px/20px @sans-serif-primary;
+  text-decoration: none;
+  text-transform: uppercase;
+  .transition;
+  &:link,
+  &:visited {
+    color: @color-grey-1;  
+    text-decoration: none;
+  }
+  &:hover,
+  &:focus {
+    background: @color-grey-8;
+    color: @color-secondary-1-0;
+  }
+}
+
+/* ============================================================================= 
+05. Header \ Menu
+================================================================================ */
+.primary__header .menu {
+  clear: none;
+  float: right;
+  max-height: none;
+}
+
+
+/* NEW */
+.lgd_in_msg {
+	float: right;
+	margin: 20px;
+	font: 500 14px/20px "Oswald", Arial, sans-serif;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: @color-grey-1;
+}
+
+.logout_form {
+	float: right;
+	margin: 15px 20px 0;
+	color: @color-grey-1;
+
+	input[type=submit] {
+		display: inline-block;
+		width: 100%;
+		padding: 10px;
+		color: @color-grey-1;
+		font: normal 500 14px/1.26em "Oswald", Arial, sans-serif;
+		text-transform: uppercase;
+		cursor: pointer;
+	}
+}
+
+.hg__header {
+	a:link,
+	a:visited {
+		color: @color-grey-1;  
+		text-decoration: none;
+	}
+	a:hover,
+	a:focus {
+		color: @color-primary-0;  
+		text-decoration: none;
+	}
+}
+
+
+/* ============================================================================= 
+05. Header \ Media Queries
+================================================================================ */
+@media only screen and (max-width: 419px) {
+  .primary__header li a {
+    padding: 20px 10px;         
+  }
+}
+
+/* ============================================================================= 
+06. Footer
+================================================================================ */
+.primary__footer {
+  background-color: white;
+  -webkit-box-shadow: 1px -2px 4px 0 rgba(0,0,0,.15);
+  box-shadow: 1px -2px 4px 0 rgba(0,0,0,.15);
+  color: @color-grey-1;
+}
+.copyright {
+  display: inline-block;
+  margin: 0;
+  padding: 20px;
+  font: 500 14px/20px "Oswald", Arial, sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+  a:link {
+    color: @color-grey-1;  
+    text-decoration: none;
+    border-bottom: none;
+  }
+  a:visited {
+    color: @color-grey-1; 
+    text-decoration: none;
+  }
+  a:hover,
+  a:focus {
+    color: @color-secondary-1-0;  
+    text-decoration: none;
+  }
+}
+
+/* ============================================================================= 
+06. Footer \ Media Queries
+================================================================================ */
+@media only screen and (max-width: 599px) {
+  .copyright {
+    width: ~"calc(100% - 20px)";
+    padding: 20px 10px 0;
+    text-align: center;
+  }
+}
+@media only screen and (max-width: 379px) {
+  .copyright {
+    font-size: 12px;
+  }
+}
+
+
+/* ============================================================================= 
+06. Main \ Form Elements
+================================================================================ */
+.primary__main {
+	label {
+		display: block;
+		margin: 0 0 10px;
+		font: normal 400 20px/1em "Oswald", Arial, sans-serif;
+		text-transform: uppercase;
+	}
+	input {
+		display: block;
+		// width: ~"calc(100% - 12px)";
+		margin: 0 0 20px 0;
+		padding: 6px;
+		color: @color-grey-1;  
+		font: normal 300 16px/1em "Oswald", Arial, sans-serif;
+	}
+	input[type=submit] {
+		display: block;
+		width: 180px;
+		margin: 20px 10px 10px 0;
+		padding: 10px;
+		color: @color-grey-1;
+		font: normal 500 16px/1em "Oswald", Arial, sans-serif;
+		text-transform: uppercase;
+		cursor: pointer;
+	}
+
+	ul {
+		display: inline-block;
+		width: 100%;
+		margin: 20px 0;
+		padding: 0;
+		li {
+			display: block;
+			// margin: 5px 0 20px;
+			// padding: 0;
+			// font: normal 400 20px/1.0em "Oswald", Arial, sans-serif;
+			// color: @color-grey-1;
+			form {
+				margin: 0 10px 0 0;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 599px) {
+  .primary__main {
+    input[type=submit] {
+			display: block;
+			width: 100%;
+			margin: 20px 0 20px;
+			padding: 10px;
+		}
+  }
+}
+@media only screen and (max-width: 379px) {
+  .copyright {
+    font-size: 12px;
+  }
+}
+
+
+
+
+/* ============================================================================= 
+09. Button
+================================================================================ */
+.btn {
+	display:inline-block;
+	margin: 0.313em 0 0;
+	padding: 10px 0;
+	width: 100%;
+	background: @color-grey-5;
+	color: @color-grey-1;
+	font: 500 16px/1.4em @sans-serif-primary;
+	letter-spacing: -0.0125em;
+	text-shadow: 0 1px rgba(255,255,255,0.5);
+	text-transform: uppercase;
+	text-align: center;
+	text-decoration: none;
+	overflow: hidden;
+	cursor: pointer;
+	border: 1px solid rgba(0,0,0,0.15);
+	border-radius: 0px;
+	.transition;
+	box-shadow:
+		inset 0 1px 0 rgba(255,255,255,0.5), 
+		0 2px 2px rgba(0,0,0,0.3), 
+		0 0 4px 1px rgba(0,0,0,0.2); 
+}
+.btn:hover,
+.btn:focus {
+	color: #212224;
+	background: @color-grey-4;
+	text-decoration: none;
+}
+
+
+
+
+.url_list {
+	margin: 0;
+	padding: 0;
+	
+	li {
+		color: @color-grey-1;
+	}
+
+	
+
+
+
+
+
+}
+
+.url_list__url {
+	list-style: none;
+	margin: 0 0 40px;
+	padding: 20px;
+	border: 1px solid @color-grey-5;
+	border-radius: 4px;
+	box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.25);
+	.transition;
+	&:hover {
+		box-shadow: 0 6px 3px 0 rgba(0, 0, 0, 0.5);
+	}
+
+	// .shortURL span,
+	// .longURL span {
+	// 	font: normal 400 20px/1.0em "Oswald", Arial, sans-serif;
+	// 	color: @color-grey-1;
+		
+	// }
+
+
+	.shortURL,
+	.longURL {
+		display: inline-block;
+		margin: 5px 16px 5px 0;
+		span {
+			font: normal 400 20px/1.0em "Oswald", Arial, sans-serif;
+			color: @color-grey-1;
+		}
+		a {
+			font: normal 300 20px/1.0em "Oswald", Arial, sans-serif;
+		}
+		a:link,
+		a:visited {
+			color: @color-secondary-1-0;
+			
+			text-decoration: none;
+		}
+		a:hover,
+		a:focus {
+			color: @color-grey-4;  
+			text-decoration: none;
+		}
+	}
+
+	// .shortURL,
+	// .longURL {
+		
+	// }
+
+	.string {
+		font: normal 300 20px/1.0em "Oswald", Arial, sans-serif;
+		color: @color-grey-3;
+	}
+
+}
+
+// .url_string {
+// 	font: normal 300 20px/1.0em "Oswald", Arial, sans-serif;
+// 	color: @color-grey-3;
+// }
+
+.url__btns {
+	form {
+		display: inline-block;
+	}
+}
+
+@media only screen and (max-width: 599px) {
+  .shortURL,
+	.longURL {
+		display: block;
+		margin: 0;
+
+	}
+}
+
+/* ============================================================================= 
+10. Helper Classes
+================================================================================ */
+// .clearfix:before,
+// .clearfix:after {
+// 	content: " ";
+// 	display: table;
+// }
+
+// .clearfix:after {
+// 	clear: both;
+// }
+
+// .clearfix {
+// 	*zoom: 1;
+// }
+
+
+
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+  }
+  * html .clearfix             { zoom: 1; } /* IE6 */
+  *:first-child+html .clearfix { zoom: 1; } /* IE7 */
