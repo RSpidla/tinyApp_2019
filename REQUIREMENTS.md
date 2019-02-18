@@ -1,6 +1,6 @@
 # <span style="color:#7FAF1B">TinyApp Project Functional Requirements</span>
 
-### TinyApp is a full stack web application built using Node and Express that allows users to shorten URLs.
+### TinyApp is a full stack web app built using Node and Express that allows users to shorten URLs.
 
 *TinyApp Project [README.md](README.md)*
 
