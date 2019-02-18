@@ -1,6 +1,6 @@
 # <span style="color:#7FAF1B">TinyApp Project</span>
 
-### TinyApp is a full stack web application built using Node and Express that allows users to shorten URLs.
+### TinyApp is a full stack web app built using Node and Express that allows users to shorten URLs.
 
 ## <span style="color:#7FAF1B">Project Screenshots:</span>
 * [/login](https://github.com/RSpidla/tinyApp_version_2/blob/master/docs/login.jpg?raw=true) - User Login Screen
