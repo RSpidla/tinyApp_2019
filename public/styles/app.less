@@ -1,21 +1,32 @@
 
 /*
 
-Description:    CSS for Tweeter Project V1.0
-Date Created:   18/11/05
-Date Updated:   18/11/06
+Description:    CSS for TinyApp Project V1.0
+Date Created:   19/02/16
+Date Updated:   19/02/17
 
 00. Mixins
 01. Variables
+    ├── Brand Primary Colour
+    ├── Brand Secondary Colours
+    ├── Brand UI Colours
+    └── Brand Fonts
 02. Reset
 03. Layout
+    └── Media Queries
 04. Typography
+    ├── Legal
+    └── Media Queries
 05. Header
+		├── Menu
+		├── Login Message
+		├── Logout Form
+    └── Media Queries
 06. Footer
-07. 
-08. 
-09. Button
-10. 
+    ├── Copyright
+    └── Media Queries
+07. Button
+08. Button
 
 */
 
@@ -53,6 +64,24 @@ Date Updated:   18/11/06
 @color-secondary-2-2: #B038B0;
 @color-secondary-2-3: #8C048C;
 @color-secondary-2-4: #6E006E;
+
+/* ==========================================================================
+01. Variables \ Brand Secondary Colour 3
+========================================================================== */
+@color-secondary-3-0: #1693A5;
+@color-secondary-3-1: #5BB9C7;
+@color-secondary-3-2: #35A3B2;
+@color-secondary-3-3: #027A8A;
+@color-secondary-3-4: #025F6C;
+
+/* ==========================================================================
+01. Variables \ Brand Secondary Colour 4
+========================================================================== */
+@color-secondary-4-0: #7FAF1B;
+@color-secondary-4-1: #BCE664;
+@color-secondary-4-2: #9CCB3A;
+@color-secondary-4-3: #649008;
+@color-secondary-4-4: #476900;
 
 /* ==========================================================================
 01. Variables \ Brand UI Colours
@@ -141,16 +170,17 @@ body.primary {
   60px;
   min-height: 100vh;
   margin: 0;
-  padding: 0;
+	padding: 0;
+	// background: url("/images/duotone.png") no-repeat center center fixed;
 	// background: #f7f7f7;
 	
 	// min-height: 100vh;
 	// padding: 0;
 	// margin: 0 !important;
-	// background: url("https://raymondspidla.ca/public/duotone-tiny-app.jpg");
-	// background-size: cover;
-	// background-repeat: no-repeat;
-	// background-position: 50% 50%;
+	background: url("/images/duotone.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
 }
 .primary__main { 
   margin: 60px 40px; 
@@ -189,7 +219,7 @@ h1, h2, h3 {
 }
 h1 {
   display: block;
-  margin: 20px 0;
+  margin: 20px 0 40px;
   font-size: 36px;
   line-height: 1.136em;
 }
@@ -228,7 +258,7 @@ a:visited {
 }
 a:hover,
 a:focus {
-	color: @color-grey-4;  
+	color: @color-secondary-4-0;  
 	text-decoration: none;
 }
 a:link.edit,
@@ -239,7 +269,7 @@ a:visited.edit {
 }
 a:hover.edit,
 a:focus.edit {
-	color: @color-grey-4;  
+	color: @color-secondary-4-0;
 	text-decoration: none;
 }
 
@@ -335,11 +365,11 @@ a:focus.edit {
 .primary__header li a:focus,
 .primary__header .menu-btn:hover {
   background-color: #f4f4f4;
-  color: @color-secondary-1-0;
+  color: @color-secondary-4-0;
 }
 .primary__header .logo {
-  display: block;
-  float: left;
+	float: left;
+	display: block;
   padding: 20px;
   border-bottom: none;
   font: 500 14px/20px @sans-serif-primary;
@@ -354,7 +384,7 @@ a:focus.edit {
   &:hover,
   &:focus {
     background: @color-grey-8;
-    color: @color-secondary-1-0;
+    color: @color-secondary-4-0;
   }
 }
 
@@ -367,46 +397,35 @@ a:focus.edit {
   max-height: none;
 }
 
-
-/* NEW */
+/* ============================================================================= 
+05. Header \ Login Message
+================================================================================ */
 .lgd_in_msg {
 	float: right;
 	margin: 20px;
+	color: @color-grey-1;
 	font: 500 14px/20px "Oswald", Arial, sans-serif;
 	text-decoration: none;
 	text-transform: uppercase;
-	color: @color-grey-1;
 }
 
+/* ============================================================================= 
+05. Header \ Logout Form
+================================================================================ */
 .logout_form {
 	float: right;
-	margin: 15px 20px 0;
+	margin: 15px 0 0;
 	color: @color-grey-1;
-
 	input[type=submit] {
 		display: inline-block;
 		width: 100%;
-		padding: 5px 10px;
+		padding: 5px 5px;
 		color: @color-grey-1;
 		font: normal 500 14px/1.26em "Oswald", Arial, sans-serif;
 		text-transform: uppercase;
 		cursor: pointer;
 	}
 }
-
-.hg__header {
-	a:link,
-	a:visited {
-		color: @color-grey-1;  
-		text-decoration: none;
-	}
-	a:hover,
-	a:focus {
-		color: @color-primary-0;  
-		text-decoration: none;
-	}
-}
-
 
 /* ============================================================================= 
 05. Header \ Media Queries
@@ -426,26 +445,21 @@ a:focus.edit {
   box-shadow: 1px -2px 4px 0 rgba(0,0,0,.15);
   color: @color-grey-1;
 }
+
+/* ============================================================================= 
+06. Footer \ Copyright
+================================================================================ */
 .copyright {
   display: inline-block;
-  margin: 0;
   padding: 20px;
   font: 500 14px/20px "Oswald", Arial, sans-serif;
-  text-decoration: none;
   text-transform: uppercase;
-  a:link {
-    color: @color-grey-1;  
-    text-decoration: none;
-    border-bottom: none;
-  }
   a:visited {
     color: @color-grey-1; 
-    text-decoration: none;
   }
   a:hover,
   a:focus {
-    color: @color-secondary-1-0;  
-    text-decoration: none;
+    color: @color-secondary-4-0;
   }
 }
 
@@ -478,16 +492,22 @@ a:focus.edit {
 	}
 	input {
 		display: block;
-		// width: ~"calc(100% - 12px)";
+		width: ~"calc(100% - 20px)";
 		margin: 0 0 20px 0;
-		padding: 6px;
+		padding: 10px 7px;
 		color: @color-grey-1;  
 		font: normal 300 16px/1em "Oswald", Arial, sans-serif;
 	}
+
+
+
+
+
+
 	input[type=submit] {
 		display: block;
-		width: 180px;
-		margin: 20px 10px 10px 0;
+		width: ~"calc(100% - 0px)";
+		margin: 10px 10px 10px 0;
 		padding: 10px;
 		color: @color-grey-1;
 		font: normal 500 16px/1em "Oswald", Arial, sans-serif;
@@ -498,7 +518,7 @@ a:focus.edit {
 	ul {
 		display: inline-block;
 		width: 100%;
-		margin: 20px 0;
+		margin: 20px 0 0;
 		padding: 0;
 		li {
 			display: block;
@@ -518,7 +538,7 @@ a:focus.edit {
     input[type=submit] {
 			display: block;
 			width: 100%;
-			margin: 20px 0 20px;
+			margin: 30px 0;
 			padding: 10px;
 		}
   }
@@ -529,11 +549,8 @@ a:focus.edit {
   }
 }
 
-
-
-
 /* ============================================================================= 
-09. Button
+07. Button
 ================================================================================ */
 .btn {
 	display:inline-block;
@@ -565,45 +582,77 @@ a:focus.edit {
 	text-decoration: none;
 }
 
+/* ============================================================================= 
+08. URLs
+================================================================================ */
+.urls,
+.login,
+.register,
+.denied {
+	display: block;
+	margin: 0 auto 40px;
+	padding: 20px 20px 40px;
+	width: ~"calc(100% - 40px)";
+	max-width: 600px;
+	background: rgba(255,255,255,.9);
+	border-radius: 4px;
+	box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
+	.transition;
+		&:hover,
+		&:focus {
+			// max-width: 520px;
+			box-shadow: 0 20px 40px -14px rgba(0,0,0,0.90);
+		}
 
+		h2 { 
+			display: block;
+			margin: 0 0 20px;
+			padding: 0 0 20px;
+			border-bottom: 1px solid @color-grey-4;
+			color: @color-grey-1;
+			text-transform: uppercase;
+		}
 
+}
+// .urls h2,
+// .login,
+// .register h2 { 
+// 	display: block;
+// 	margin: 0 0 20px;
+// 	padding: 0 0 20px;
+// 	border-bottom: 1px solid @color-grey-4;
+// 	color: @color-grey-1;
+// 	text-transform: uppercase;
+// }
 
+/* ============================================================================= 
+08. URLs \ URL > List
+================================================================================ */
 .url_list {
 	margin: 0;
 	padding: 0;
-	
 	li {
 		color: @color-grey-1;
 	}
-
-	
-
-
-
-
-
 }
 
+/* ============================================================================= 
+08. URLs \ URL > List Item
+================================================================================ */
 .url_list__url {
 	list-style: none;
 	margin: 0 0 40px;
 	padding: 20px;
 	border: 1px solid @color-grey-5;
 	border-radius: 4px;
-	box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.25);
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.125);
 	.transition;
 	&:hover {
-		box-shadow: 0 6px 3px 0 rgba(0, 0, 0, 0.5);
+		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.375);
 	}
-
-	// .shortURL span,
-	// .longURL span {
-	// 	font: normal 400 20px/1.0em "Oswald", Arial, sans-serif;
-	// 	color: @color-grey-1;
-		
-	// }
-
-
+	&:last-child {
+		margin: 0 0 20px;
+	}
 	.shortURL,
 	.longURL {
 		display: inline-block;
@@ -617,8 +666,7 @@ a:focus.edit {
 		}
 		a:link,
 		a:visited {
-			color: @color-secondary-1-0;
-			
+			color: @color-secondary-4-0;		
 			text-decoration: none;
 		}
 		a:hover,
@@ -628,11 +676,6 @@ a:focus.edit {
 		}
 	}
 
-	// .shortURL,
-	// .longURL {
-		
-	// }
-
 	.string {
 		font: normal 300 20px/1.0em "Oswald", Arial, sans-serif;
 		color: @color-grey-3;
@@ -640,46 +683,99 @@ a:focus.edit {
 
 }
 
-// .url_string {
-// 	font: normal 300 20px/1.0em "Oswald", Arial, sans-serif;
-// 	color: @color-grey-3;
-// }
-
+/* ============================================================================= 
+08. URLs \ URL > Buttons
+================================================================================ */
 .url__btns {
 	form {
 		display: inline-block;
 	}
 }
 
+/* ============================================================================= 
+08. Tweet \ Card \ Icons
+================================================================================ */
+.compose-icon:before {
+	content: "\f14b"; 
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	text-decoration: inherit;
+	font-size: 1.125rem;
+	position: relative;
+	top: -1.25px;
+	left: -5px;
+	text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+	color: @color-grey-3; 
+}
+
+.compose {
+	margin: 0 0 20px 5px;
+	font: normal 300 16px/1.4em "Oswald", Arial, sans-serif;
+	text-transform: uppercase;
+
+	// a {
+	// 	font: normal 300 20px/1.0em "Oswald", Arial, sans-serif;
+	// }
+	a:link,
+	a:visited {
+		color: @color-secondary-4-0;		
+		text-decoration: none;
+	}
+	a:hover,
+	a:focus {
+		color: @color-grey-1;  
+		text-decoration: none;
+	}
+}
+
+
+/* ============================================================================= 
+08.	Tweet \ Card \ Icons \ Load Characters
+================================================================================ */
+// .compose-icon:before {
+// 	content: "\f14b";
+// 	font-size: 1.25rem;
+// 	left: -5px;
+// 	top: 0px;
+// }
+
+
+
+/* ============================================================================= 
+08. URLs \ Access Denied
+================================================================================ */
+.denied {
+	font-family: @sans-serif-primary;
+	text-align: center;
+}
+
+
+
+
+/* ============================================================================= 
+08. URLs \ Media Queries
+================================================================================ */
 @media only screen and (max-width: 599px) {
   .shortURL,
 	.longURL {
 		display: block;
 		margin: 0;
-
 	}
 }
+
+
+
+
+
+
+
+
+
 
 /* ============================================================================= 
 10. Helper Classes
 ================================================================================ */
-// .clearfix:before,
-// .clearfix:after {
-// 	content: " ";
-// 	display: table;
-// }
-
-// .clearfix:after {
-// 	clear: both;
-// }
-
-// .clearfix {
-// 	*zoom: 1;
-// }
-
-
-
-
 .clearfix:after {
 	visibility: hidden;
 	display: block;
@@ -687,6 +783,6 @@ a:focus.edit {
 	content: " ";
 	clear: both;
 	height: 0;
-  }
-  * html .clearfix             { zoom: 1; } /* IE6 */
-  *:first-child+html .clearfix { zoom: 1; } /* IE7 */
+}
+* html .clearfix             { zoom: 1; } /* IE6 */
+*:first-child+html .clearfix { zoom: 1; } /* IE7 */
