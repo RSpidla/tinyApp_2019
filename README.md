@@ -28,10 +28,9 @@
 ## <span style="color:#7FAF1B">Dev Dependencies:</span>
 * [nodemon](https://nodemon.io/)
 
-
 ## <span style="color:#7FAF1B">Authors:</span>
 
-* Raymond Spidla - [Github Account](https://github.com/RSpidla)
+* Raymond Spidla - [Github Account](https://github.com/RSpidla) - :computer::two_hearts::two_hearts:
 
 <!-- See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project. -->
 
