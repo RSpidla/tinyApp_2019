@@ -228,21 +228,6 @@ a:focus {
   color: #7FAF1B;
   text-decoration: none;
 }
-a:link.edit,
-a:visited.edit {
-  color: white;
-  text-decoration: none;
-  -webkit-transition: all 0.3s ease-out;
-  -moz-transition: all 0.3s ease-out;
-  -o-transition: all 0.3s ease-out;
-  -ms-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out;
-}
-a:hover.edit,
-a:focus.edit {
-  color: #7FAF1B;
-  text-decoration: none;
-}
 /* ============================================================================= 
 04. Typography \ Media Queries
 ================================================================================ */
@@ -535,6 +520,16 @@ a:focus.edit {
   background: #A3ACB0;
   text-decoration: none;
 }
+.edit {
+  display: block;
+  width: calc(100% - 0px);
+  margin: 10px 10px 10px 0;
+  padding: 10px;
+  color: #263238;
+  font: normal 500 16px/1em "Oswald", Arial, sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+}
 /* ============================================================================= 
 08. URLs
 ================================================================================ */
@@ -613,6 +608,7 @@ a:focus.edit {
 .url_list__url .longURL {
   display: inline-block;
   margin: 5px 16px 5px 0;
+  font: normal 300 20px/1em "Oswald", Arial, sans-serif;
 }
 .url_list__url .shortURL span,
 .url_list__url .longURL span {

@@ -23,7 +23,6 @@
         
       <h1>TinyApp Home Page - URLs</h1>
       
-      <!-- <p><a href="/urls/new" class="link">Create New TinyURL</a></p> -->
       <p class="compose"><a href="/urls/new" class="compose-icon" id="compose-button">Create New TinyURL</a></p>
 
       <ul class="url_list">
@@ -36,16 +35,11 @@
             </div>
             
             <div class="longURL">
-              <!-- <span>LongURL: </span><a href="<%= urls[key].longURL %>" target="blank"><%= urls[key].longURL %> </a> -->
               <span>LongURL: </span><%= urls[key].longURL %> </a>
             </div>
             
             <div class="url__btns">
-              <!-- <form method="POST" action="/urls/<%= key %>/edit">
-                <input type="submit" value="Edit" class="btn reset">
-              </form> -->
-
-              <a href="/urls/<%= key %>">Edit</a>
+              <a href="/urls/<%= key %>" class="edit">Edit</a>
               
               <form method="POST" action="/urls/<%= key %>/delete">
                 <input type="submit" value="Delete" class="btn reset">

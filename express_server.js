@@ -1,6 +1,6 @@
 const express = require("express");
-const cookieParser = require('cookie-parser');
-// const cookieSession = require('cookie-session');
+// const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
 const app = express();
 const PORT = 8080;
 
@@ -10,14 +10,14 @@ const bcrypt = require('bcrypt');
 
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(cookieParser());
-// app.use(cookieSession({
-//   name: 'session',
-//   keys: ['qwertyu', 'ertyui'],
+// app.use(cookieParser());
+app.use(cookieSession({
+  name: 'session',
+  keys: ['qwertyu', 'ertyui'],
 
-//   // Cookie Options
-//   maxAge: 24 * 60 * 60 * 1000 // 24 hours
-// }))
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
 
 app.use(express.static("public"));
 app.use('/images', express.static(__dirname + '/images'));
@@ -60,12 +60,18 @@ const users = {
 
 // Root URL Route ===============================
 app.get("/", (req, res) => {
-  res.send("Hello and Good Day!");
+  const user_id = req.session.user_id;
+  if (user_id) {
+    res.redirect('/urls');
+  } else {
+    req.session = null;
+    res.redirect('/login');
+  }
 });
 
 // New URL Route ===============================
 app.get("/urls/new", (req, res) => {
-  let user_id = req.cookies['user_id'];
+  let user_id = req.session['user_id'];
   let user = users[user_id];
   let longURL = req.params['shortURL'];
   let templateVars = { 
@@ -86,19 +92,30 @@ app.get("/u/:shortURL", (req, res) => {
 
 // Single and Shortened URL Route ===============================
 app.get("/urls/:shortURL", (req, res) => {
-  let user_id = req.cookies['user_id'];
+  let user_id = req.session['user_id'];
   let user = users[user_id];
+  
+  console.log(user_id);
+  // console.log(users);
+  console.log(users[user_id].user_id);
+  
   let templateVars = {
     shortURL: req.params.shortURL,
     longURL: urlDatabase[req.params.shortURL],
     user
   };
-  res.render("urls_show", templateVars);
+  if (user_id === users[user_id]) {
+    res.render('urls_show', templateVars);
+  } else {
+    // res.status(401).send('Not authorized to edit URLS');
+    res.render('urls_show', templateVars);
+  }
+  // res.render("urls_show", templateVars);
 });
 
 // URLs Route ===============================
 app.get("/urls", (req, res) => {
-  let user_id = req.cookies['user_id'];
+  let user_id = req.session['user_id'];
   let user = users[user_id];
   const usersURLS = urlsForUser(user_id, urlDatabase);
   let templateVars = { 
@@ -119,7 +136,7 @@ app.get("/urls.json", (req, res) => {
 });
 
 app.get('/register', (req, res) => {
-  let user_id = req.cookies['user_id'];
+  let user_id = req.session['user_id'];
   let user = users[user_id];
   let templateVars = {
     user    
@@ -129,7 +146,7 @@ app.get('/register', (req, res) => {
 
 // Login ===============================
 app.get('/login', (req, res) => {
-  let user_id = req.cookies['user_id'];
+  let user_id = req.session['user_id'];
   let user = users[user_id];
   let templateVars = {
     user
@@ -142,7 +159,7 @@ app.get('/login', (req, res) => {
 
 // Delete URL Route ===============================
 app.post('/urls/:id/delete', (req, res) => {
-  const currentUser_id = req.cookies['user_id'];
+  const currentUser_id = req.session['user_id'];
   const currentURL = urlDatabase[req.params.id];
   if (!currentUser_id) {
     res.redirect('/login');
@@ -162,7 +179,7 @@ app.post('/urls/:id/delete', (req, res) => {
 // Update URL Route ===============================
 app.post('/urls/:id/edit', (req, res) => {
   const { new_longURL } = req.body;
-  const currentUser_id = req.cookies['user_id'];
+  const currentUser_id = req.session['user_id'];
   const currentURL = urlDatabase[req.params.id];
   if (!currentUser_id) {
       return res.redirect('/login');
@@ -199,7 +216,7 @@ app.post('/login', (req, res) => {
       }
     }
   if (user_id) {
-    res.cookie('user_id', user_id);
+    req.session.user_id = user_id;
     res.status(200).redirect('/urls');
   } else {
       res.status(403).send('Status : 403 : Invalid username or password');
@@ -208,7 +225,8 @@ app.post('/login', (req, res) => {
 
 // Logout Route ===============================
 app.post('/logout', (req, res) => {
-  res.clearCookie('user_id', { path: '/' });
+  // res.clearCookie('user_id', { path: '/' });
+  req.session = null;
   res.status(200).redirect('/urls');
 });
 
@@ -238,7 +256,7 @@ app.post('/register', (req, res) => {
     res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong>");
   } else {
     users[user_id] = { user_id, email, hashedPassword };
-    res.cookie('user_id', user_id);
+    req.session.user_id = user_id;
     res.status(200).redirect('urls');
   }
 
@@ -250,6 +268,21 @@ app.post("/urls", (req, res) => {
   urlDatabase[rng] = req.body.longURL;
   res.status(302).redirect(`/urls/${rng}`);
 });
+
+// router.post('/', (req, res) => {
+//   const currentUser = req.session.user_id;
+//   const { longURL } = req.body;
+//   const random = helperFunctions.randomUrl();
+//   const newURL = {
+//     userID: currentUser,
+//     [random]: longURL,
+//     views: 0,
+//     visiterLog: [],
+//     uniqueViews: []
+//   };
+//   urlDatabase[random] = newURL;
+//   res.status(201).redirect(`/urls`);
+// });
 
 
 // Helper Functions ===============================
