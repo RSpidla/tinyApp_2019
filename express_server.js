@@ -1,5 +1,6 @@
 const express = require("express");
 const cookieParser = require('cookie-parser');
+// const cookieSession = require('cookie-session');
 const app = express();
 const PORT = 8080;
 
@@ -10,6 +11,13 @@ const bcrypt = require('bcrypt');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
+// app.use(cookieSession({
+//   name: 'session',
+//   keys: ['qwertyu', 'ertyui'],
+
+//   // Cookie Options
+//   maxAge: 24 * 60 * 60 * 1000 // 24 hours
+// }))
 
 app.use(express.static("public"));
 app.use('/images', express.static(__dirname + '/images'));
@@ -90,16 +98,9 @@ app.get("/urls/:shortURL", (req, res) => {
 
 // URLs Route ===============================
 app.get("/urls", (req, res) => {
-  
-  console.log(req.cookies);
-  
-  
   let user_id = req.cookies['user_id'];
-  console.log('TEST-user_id: ' + user_id);
   let user = users[user_id];
-  console.log('user: ' + user);
   const usersURLS = urlsForUser(user_id, urlDatabase);
-  console.log('usersURLS: ' + usersURLS);
   let templateVars = { 
     urls: urlDatabase,
     users,
@@ -107,10 +108,8 @@ app.get("/urls", (req, res) => {
     usersURLS
   };
   if (!user_id) {
-    console.log('urls if statement');
     return res.redirect('/login');
   }
-  console.log('urls render');
   res.render("urls_index", templateVars);
 });
 
@@ -183,91 +182,29 @@ app.post('/urls/:id/edit', (req, res) => {
   }
 });
 
-// // Login Route ===============================
-// app.post('/login', (req, res) => {
-//   // const { email, password } = req.body;
-//   const email = req.body.email;
-//   const password = req.body.password;
-
-  
-  
-//   // Step 1 - Email Comparison
-//   let user;
-//   for (let key in users) {
-//     if (users[key].email === email) {
-//       user = users[key];
-//     }  
-//   }
-//    if(!user) {
-//     res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong> - User Doesn't Exist</body>");
-//     return;
-//    }
-  
-//   // Step 2 - Password Comparison
-//   let userPass = users['shortURL'].password;
-//   // conaole.log(users);
-//   if (bcrypt.compareSync(password, userPass)) {
-    
-//     // Step 3 - If passwords match - Do login & redirect
-//     req.cookies['user_id'] = user_id;
-//     res.status(200).redirect('/');
-//   } else {
-    
-//     // Step 4 - If passwords don't match - send failure
-//     res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong> - User Doesn't Exist</body>");
-//   }
-
-//   // Step 5 - End Password comparison
-
-
-
-  
-
-
-  
-  
-  
-  
-
-
-
-// });
-
-
+// Login Route ===============================
 app.post('/login', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   const hashedPassword = bcrypt.hashSync(password, 10);
   const user = users.user_id;
   let user_id;
-
   for (let key in users) {
-      let userPassword = users[key].password;
+    let userPassword = users[key].password;
       if (
-        users[key].email === email &&
-        
+        users[key].email === email &&    
         bcrypt.compareSync(password, hashedPassword)
       ) {
         user_id = key;
       }
     }
   if (user_id) {
-    console.log('if statement 1');
-      // res.cookies['user_id'] = user_id;
-
-      // res.cookies.user_id = user_id;
-
-      res.cookie('user_id', user_id);
-
-      res.status(200).redirect('/urls');
+    res.cookie('user_id', user_id);
+    res.status(200).redirect('/urls');
   } else {
-    console.log('if statement 2');
       res.status(403).send('Status : 403 : Invalid username or password');
   }
-
-  
 });
-
 
 // Logout Route ===============================
 app.post('/logout', (req, res) => {
@@ -301,21 +238,11 @@ app.post('/register', (req, res) => {
     res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong>");
   } else {
     users[user_id] = { user_id, email, hashedPassword };
-
-    console.log('user_id: ' + user_id);
-    console.log('email: ' + email);
-    console.log('hashedPassword: ' + hashedPassword);
-
-    console.log(res.cookie);
     res.cookie('user_id', user_id);
     res.status(200).redirect('urls');
   }
 
 });
-
-
-
-
 
 // URLs Route ===============================
 app.post("/urls", (req, res) => {
