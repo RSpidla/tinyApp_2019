@@ -4,6 +4,10 @@ const app = express();
 const PORT = 8080;
 
 const bodyParser = require("body-parser");
+
+const bcrypt = require('bcrypt');
+
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 
@@ -86,9 +90,16 @@ app.get("/urls/:shortURL", (req, res) => {
 
 // URLs Route ===============================
 app.get("/urls", (req, res) => {
+  
+  console.log(req.cookies);
+  
+  
   let user_id = req.cookies['user_id'];
+  console.log('TEST-user_id: ' + user_id);
   let user = users[user_id];
+  console.log('user: ' + user);
   const usersURLS = urlsForUser(user_id, urlDatabase);
+  console.log('usersURLS: ' + usersURLS);
   let templateVars = { 
     urls: urlDatabase,
     users,
@@ -96,8 +107,10 @@ app.get("/urls", (req, res) => {
     usersURLS
   };
   if (!user_id) {
+    console.log('urls if statement');
     return res.redirect('/login');
   }
+  console.log('urls render');
   res.render("urls_index", templateVars);
 });
 
@@ -170,25 +183,91 @@ app.post('/urls/:id/edit', (req, res) => {
   }
 });
 
-// Login Route ===============================
+// // Login Route ===============================
+// app.post('/login', (req, res) => {
+//   // const { email, password } = req.body;
+//   const email = req.body.email;
+//   const password = req.body.password;
+
+  
+  
+//   // Step 1 - Email Comparison
+//   let user;
+//   for (let key in users) {
+//     if (users[key].email === email) {
+//       user = users[key];
+//     }  
+//   }
+//    if(!user) {
+//     res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong> - User Doesn't Exist</body>");
+//     return;
+//    }
+  
+//   // Step 2 - Password Comparison
+//   let userPass = users['shortURL'].password;
+//   // conaole.log(users);
+//   if (bcrypt.compareSync(password, userPass)) {
+    
+//     // Step 3 - If passwords match - Do login & redirect
+//     req.cookies['user_id'] = user_id;
+//     res.status(200).redirect('/');
+//   } else {
+    
+//     // Step 4 - If passwords don't match - send failure
+//     res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong> - User Doesn't Exist</body>");
+//   }
+
+//   // Step 5 - End Password comparison
+
+
+
+  
+
+
+  
+  
+  
+  
+
+
+
+// });
+
+
 app.post('/login', (req, res) => {
-  const { email, password } = req.body;
-  const user = { email, password };
+  const email = req.body.email;
+  const password = req.body.password;
+  const hashedPassword = bcrypt.hashSync(password, 10);
+  const user = users.user_id;
   let user_id;
+
   for (let key in users) {
-    if (users[key].email === email && users[key].password === password) {
-      user_id = key;
+      let userPassword = users[key].password;
+      if (
+        users[key].email === email &&
+        
+        bcrypt.compareSync(password, hashedPassword)
+      ) {
+        user_id = key;
+      }
     }
-  }
-  if (user.email === "" || user.password === "") {
-    res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong> - Enter Email and Password</body></html>\n");
-  } else if (user_id) {
-    res.cookie('user_id', user_id);
-    res.status(200).redirect('/urls');
+  if (user_id) {
+    console.log('if statement 1');
+      // res.cookies['user_id'] = user_id;
+
+      // res.cookies.user_id = user_id;
+
+      res.cookie('user_id', user_id);
+
+      res.status(200).redirect('/urls');
   } else {
-    res.status(403).send("<html><body><strong>Status: 403 Forbidden</strong> - Invalid Username or Password</body></html>\n");
+    console.log('if statement 2');
+      res.status(403).send('Status : 403 : Invalid username or password');
   }
+
+  
 });
+
 
 // Logout Route ===============================
 app.post('/logout', (req, res) => {
@@ -199,26 +278,44 @@ app.post('/logout', (req, res) => {
 // Register Route ===============================
 app.post('/register', (req, res) => {
   const { email, password } = req.body;
+  const hashedPassword = bcrypt.hashSync(password, 10);
   const rng = generateRandomString();
-  const user_id = rng;
-  const user = { user_id, email, password };
-  res.cookie('user_id', user_id);
-  let isFound = false;
-  for (let key in users) {
+  const user_id = rng;  
+  
+  let emailNotRegistered;
+
+  for(let key in users) {
+    
     if (users[key].email === email) {
-      isFound = true;
+      emailNotRegistered = false;
+    } else {
+      emailNotRegistered = true;
     }
   }
-  if (user.email === "" || user.password === "") {
-    res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong> - Enter Email and Password</html></body>");
-  } else if (isFound === true) {
+
+  if (!emailNotRegistered) {
     res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong> - Email Already Registered</body></html>");
+  } else if (!email || !password) {
+    res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong> - Enter Email and Password</html></body>");
+  } else if (users[user_id]) {
+    res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong>");
   } else {
-    users[user_id] = user;
+    users[user_id] = { user_id, email, hashedPassword };
+
+    console.log('user_id: ' + user_id);
+    console.log('email: ' + email);
+    console.log('hashedPassword: ' + hashedPassword);
+
+    console.log(res.cookie);
     res.cookie('user_id', user_id);
     res.status(200).redirect('urls');
   }
+
 });
+
+
+
+
 
 // URLs Route ===============================
 app.post("/urls", (req, res) => {
@@ -252,7 +349,7 @@ const urlsForUser = (id, data) => {
 };
 
 
-// App Start Message Route ===============================
+// App Starting Message Route ===============================
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });
