@@ -3,12 +3,12 @@
 ### TinyApp is a full stack web app built using Node and Express that allows users to shorten URLs.
 
 ## <span style="color:#7FAF1B">Project Screenshots:</span>
-* [/login](https://github.com/RSpidla/tinyApp_version_2/blob/master/docs/login.jpg?raw=true) - User Login Screen
-* [/register](https://github.com/RSpidla/tinyApp_version_2/blob/master/docs/register.jpg?raw=true) - User Registration Screen
-* [/urls](https://github.com/RSpidla/tinyApp_version_2/blob/master/docs/urls_index.jpg?raw=true) - User Home Screen
-* [/urls/new](https://github.com/RSpidla/tinyApp_version_2/blob/master/docs/urls_new.jpg?raw=true) - Create New URL Screen
-* [/urls/:shortURL](https://github.com/RSpidla/tinyApp_version_2/blob/master/docs/urls_show.jpg?raw=true) - Single and Shortened URL Screen
-* [/urls/denied](https://raw.githubusercontent.com/RSpidla/tinyApp_version_2/feature/front-end/docs/urls_denied.jpg)
+*[/urls](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/tinyApp_2019-urls.jpg) - User Home Screen
+*[/login](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/tinyApp_2019-login.jpg) - User Login Screen
+*[/register](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/tinyApp_2019-register.jpg) - User Registration Screen
+*[/urls_new](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/tinyApp_2019-urls.jpg) - Create New URL Screen
+*[/urls/:shortURL](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/tinyApp_2019-urls_show.jpg) - Short URL Screen
+*[/urls_denied](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/tinyApp_2019-denied.jpg) - Permission Denied Screen
 
 ## <span style="color:#7FAF1B">Tech Stack:</span>
 
