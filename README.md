@@ -16,12 +16,9 @@
 * [Express](http://expressjs.com/) - Web application server framework
 
 ## <span style="color:#7FAF1B">Dependencies:</span>
-
-
 * [ejs](https://github.com/mde/ejs) - Embedded JavaScript templates
 * [bcrypt](https://github.com/kelektiv/node.bcrypt.js#read) - A library to help you hash passwords
 * [body-parser](https://github.com/expressjs/body-parser#readme) - Node.js body parsing middleware
-
 * [cookie-session](https://github.com/expressjs/cookie-session#readme) - Simple cookie-based session middleware
 
 
