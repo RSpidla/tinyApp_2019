@@ -1,6 +1,6 @@
 # <span style="color:#7FAF1B">TinyApp Project Functional Requirements</span>
 
-Functional requirements including: ser stories, display requirements and behaviour requirements.
+Functional requirements including: user stories, display requirements and behaviour requirements.
 
 ## <span style="color:#7FAF1B">User Stories</span>
 
