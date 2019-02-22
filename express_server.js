@@ -87,7 +87,21 @@ app.get("/urls/new", (req, res) => {
 // Short URL Requests Route ===============================
 app.get("/u/:shortURL", (req, res) => {
   let longURL = req.params['shortURL'];
-  res.redirect(urlDatabase[req.params['shortURL']].longURL);
+
+console.log(urlDatabase[req.params['shortURL'].longURL]);
+  
+
+  if (!longURL.includes("http://") || !longURL.includes("https://")) {
+    res.redirect("http://" + urlDatabase[req.params['shortURL'].longURL]);
+    return;
+  } else {
+    res.redirect(urlDatabase[req.params['shortURL'].longURL]);
+  }
+
+// Final fix here --- returning 'undefined' here
+
+
+  // res.redirect(urlDatabase[req.params['shortURL'].longURL);
 })
 
 // Single and Shortened URL Route ===============================
@@ -95,13 +109,14 @@ app.get("/urls/:shortURL", (req, res) => {
   let user_id = req.session['user_id'];
   let user = users[user_id];
   
-  console.log(user_id);
-  // console.log(users);
-  console.log(users[user_id].user_id);
+  // console.log(user_id);
+  // // console.log(users);
+  // console.log(users[user_id].user_id);
+  
   
   let templateVars = {
     shortURL: req.params.shortURL,
-    longURL: urlDatabase[req.params.shortURL],
+    longURL: urlDatabase[req.params.shortURL].longURL,
     user
   };
   if (user_id === users[user_id]) {
@@ -149,7 +164,8 @@ app.get('/login', (req, res) => {
   let user_id = req.session['user_id'];
   let user = users[user_id];
   let templateVars = {
-    user
+    user,
+    error: ''
   }
   res.render("login", templateVars);
 });
@@ -161,6 +177,11 @@ app.get('/login', (req, res) => {
 app.post('/urls/:id/delete', (req, res) => {
   const currentUser_id = req.session['user_id'];
   const currentURL = urlDatabase[req.params.id];
+
+  console.log(req.session['user_id']);
+  console.log(urlDatabase[req.params.userID]);
+
+
   if (!currentUser_id) {
     res.redirect('/login');
   }
@@ -174,6 +195,14 @@ app.post('/urls/:id/delete', (req, res) => {
     delete urlDatabase[req.params.id]
     res.redirect('/urls');
   }
+
+
+
+
+
+
+
+  
 });
 
 // Update URL Route ===============================
@@ -181,6 +210,11 @@ app.post('/urls/:id/edit', (req, res) => {
   const { new_longURL } = req.body;
   const currentUser_id = req.session['user_id'];
   const currentURL = urlDatabase[req.params.id];
+
+  console.log(req.session['user_id']);
+  console.log(urlDatabase[req.params.userID]);
+
+
   if (!currentUser_id) {
       return res.redirect('/login');
   }
@@ -199,27 +233,36 @@ app.post('/urls/:id/edit', (req, res) => {
   }
 });
 
+function checkUser(email, password) {
+  for (let user_id in users) {
+    let hashedPassword = users[user_id].hashedPassword;
+      if (
+        users[user_id].email === email &&    
+        bcrypt.compareSync(password, hashedPassword)
+      ) {
+        return user_id;
+        
+      }
+    }
+}
 // Login Route ===============================
 app.post('/login', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  const hashedPassword = bcrypt.hashSync(password, 10);
-  const user = users.user_id;
-  let user_id;
-  for (let key in users) {
-    let userPassword = users[key].password;
-      if (
-        users[key].email === email &&    
-        bcrypt.compareSync(password, hashedPassword)
-      ) {
-        user_id = key;
-      }
-    }
+  // const user = users.user_id;
+  let user_id = checkUser(email, password);
+  
   if (user_id) {
     req.session.user_id = user_id;
     res.status(200).redirect('/urls');
   } else {
-      res.status(403).send('Status : 403 : Invalid username or password');
+      res.status(403)//.send('Status : 403 : Invalid username or password');
+      let user = users[user_id];
+      let templateVars = {
+        user,
+        error: "sdfgsx"
+      }
+      res.render('login', templateVars)
   }
 });
 
@@ -265,7 +308,10 @@ app.post('/register', (req, res) => {
 // URLs Route ===============================
 app.post("/urls", (req, res) => {
   let rng = generateRandomString();
-  urlDatabase[rng] = req.body.longURL;
+  urlDatabase[rng] = {
+    longURL: req.body.longURL,
+    userID: req.session.user_id
+  }
   res.status(302).redirect(`/urls/${rng}`);
 });
 
