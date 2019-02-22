@@ -31,16 +31,16 @@
 
             <div class="shortURL">
               <span>Short URL:</span>
-              <span class="url_string"><a href="#"><%= shortURL %></a></span>
+              <span class="url_string"><a href="<%= longURL %>" target="blank"><%= shortURL %></a></span>
             </div>
 
             <div class="longURL">
               <span>Long URL:</span>
-              <span class="url_string"><a href="<%= longURL %>"><%= longURL %></a></span>
+              <span class="url_string"><a href="<%= longURL %>" target="blank"><%= longURL %></a></span>
             </div>
 
             <form method="POST" action="/urls/<%= shortURL %>/edit">
-              <input type="text" name="updatedLongURL" placeholder="Enter new URL">
+              <input type="text" name="longURL" placeholder="Enter new URL">
               <input type="submit" value="Update URL" class="btn">
             </form>
 
