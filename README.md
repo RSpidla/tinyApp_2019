@@ -8,17 +8,22 @@
 * [TinyApp Login Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Login_Page.jpg?raw=true)
 ![TinyApp Login Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Login_Page.jpg?raw=true)
 
+
 * [TinyApp Register Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Register_Page.jpg?raw=true)
 ![TinyApp Register Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Register_Page.jpg?raw=true)
+
 
 * [TinyApp Home Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Home_Page.jpg?raw=true)
 ![TinyApp Home Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Home_Page.jpg?raw=true)
 
+
 [TinyApp Create URL Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Create_URL_Page.jpg?raw=true)
 ![TinyApp Create URL Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Create_URL_Page.jpg?raw=true)
 
+
 * [TinyApp Edit URL Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Edit_URL_Page.jpg?raw=true)
 ![TinyApp Edit URL Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Edit_URL_Page.jpg?raw=true)
+
 
 * [TinyApp Permission Denied Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Edit_URL-Error_Page.jpg?raw=true)
 ![TinyApp Permission Denied Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Edit_URL-Error_Page.jpg?raw=true)
