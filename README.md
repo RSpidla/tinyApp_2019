@@ -3,12 +3,21 @@
 ### TinyApp is a full stack web app built using Node and Express that allows users to shorten URLs.
 
 ## <span style="color:#7FAF1B">Project Screenshots:</span>
-* [/urls](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/tinyApp_2019-urls.jpg) - User Home Screen
-* [/login](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/tinyApp_2019-login.jpg) - User Login Screen
-* [/register](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/tinyApp_2019-register.jpg) - User Registration Screen
-* [/urls_new](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/tinyApp_2019-urls.jpg) - Create New URL Screen
-* [/urls/:shortURL](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/tinyApp_2019-urls_show.jpg) - Short URL Screen
-* [/urls_denied](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/tinyApp_2019-denied.jpg) - Permission Denied Screen
+
+
+* [TinyApp Login Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Login_Page.jpg?raw=true)
+* ![TinyApp Login Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Login_Page.jpg?raw=true)
+* [TinyApp Register Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Register_Page.jpg?raw=true)
+* ![TinyApp Register Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Register_Page.jpg?raw=true)
+* [TinyApp Home Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Home_Page.jpg?raw=true)
+* ![TinyApp Home Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Home_Page.jpg?raw=true)
+* [TinyApp Create URL Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Create_URL_Page.jpg?raw=true)
+* ![TinyApp Create URL Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Create_URL_Page.jpg?raw=true)
+* [TinyApp Edit URL Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Edit_URL_Page.jpg?raw=true)
+* ![TinyApp Edit URL Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Edit_URL_Page.jpg?raw=true)
+* [TinyApp Permission Denied Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Edit_URL-Error_Page.jpg?raw=true)
+* ![TinyApp Permission Denied Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Edit_URL-Error_Page.jpg?raw=true)
+
 
 ## <span style="color:#7FAF1B">Tech Stack:</span>
 
@@ -25,15 +34,9 @@
 ## <span style="color:#7FAF1B">Dev Dependencies:</span>
 * [nodemon](https://nodemon.io/)
 
-<!-- See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project. -->
-
 ## <span style="color:#7FAF1B">Requirements:</span>
 
 User stories, display requirements and behaviour requirements - [REQUIREMENTS.md](REQUIREMENTS.md)
-
-## <span style="color:#7FAF1B">License:</span>
-
-This project is licensed under the MIT License - [LICENSE.md](LICENSE.md)
 
 ## <span style="color:#7FAF1B">Acknowledgments:</span>
 
