@@ -404,7 +404,7 @@ a:focus {
 	float: right;
 	margin: 20px;
 	color: @color-grey-1;
-	font: 500 14px/20px "Oswald", Arial, sans-serif;
+	font: 500 14px/20px @sans-serif-primary;
 	text-decoration: none;
 	text-transform: uppercase;
 }
@@ -421,7 +421,7 @@ a:focus {
 		width: 100%;
 		padding: 5px 5px;
 		color: @color-grey-1;
-		font: normal 500 14px/1.26em "Oswald", Arial, sans-serif;
+		font: normal 500 14px/1.26em @sans-serif-primary;
 		text-transform: uppercase;
 		cursor: pointer;
 	}
@@ -452,7 +452,7 @@ a:focus {
 .copyright {
   display: inline-block;
   padding: 20px;
-  font: 500 14px/20px "Oswald", Arial, sans-serif;
+  font: 500 14px/20px @sans-serif-primary;
   text-transform: uppercase;
   a:visited {
     color: @color-grey-1; 
@@ -487,7 +487,7 @@ a:focus {
 	label {
 		display: block;
 		margin: 0 0 10px;
-		font: normal 400 20px/1em "Oswald", Arial, sans-serif;
+		font: normal 400 20px/1em @sans-serif-primary;
 		text-transform: uppercase;
 	}
 	input {
@@ -496,25 +496,18 @@ a:focus {
 		margin: 0 0 20px 0;
 		padding: 10px 7px;
 		color: @color-grey-1;  
-		font: normal 300 16px/1em "Oswald", Arial, sans-serif;
+		font: normal 300 16px/1em @sans-serif-primary;
 	}
-
-
-
-
-
-
 	input[type=submit] {
 		display: block;
 		width: ~"calc(100% - 0px)";
 		margin: 10px 10px 10px 0;
 		padding: 10px;
 		color: @color-grey-1;
-		font: normal 500 16px/1em "Oswald", Arial, sans-serif;
+		font: normal 500 16px/1em @sans-serif-primary;
 		text-transform: uppercase;
 		cursor: pointer;
 	}
-
 	ul {
 		display: inline-block;
 		width: 100%;
@@ -522,10 +515,6 @@ a:focus {
 		padding: 0;
 		li {
 			display: block;
-			// margin: 5px 0 20px;
-			// padding: 0;
-			// font: normal 400 20px/1.0em "Oswald", Arial, sans-serif;
-			// color: @color-grey-1;
 			form {
 				margin: 0 10px 0 0;
 			}
@@ -583,12 +572,12 @@ a:focus {
 }
 
 .edit {
-	display: block;
+	display: inline-block;
 		width: ~"calc(100% - 0px)";
 		margin: 10px 10px 10px 0;
 		padding: 10px;
 		color: @color-grey-1;
-		font: normal 500 16px/1em "Oswald", Arial, sans-serif;
+		font: normal 500 16px/1em @sans-serif-primary;
 		text-transform: uppercase;
 		cursor: pointer;
 
@@ -626,16 +615,6 @@ a:focus {
 		}
 
 }
-// .urls h2,
-// .login,
-// .register h2 { 
-// 	display: block;
-// 	margin: 0 0 20px;
-// 	padding: 0 0 20px;
-// 	border-bottom: 1px solid @color-grey-4;
-// 	color: @color-grey-1;
-// 	text-transform: uppercase;
-// }
 
 /* ============================================================================= 
 08. URLs \ URL > List
@@ -669,13 +648,13 @@ a:focus {
 	.longURL {
 		display: inline-block;
 		margin: 5px 16px 20px 0;
-		font: normal 300 20px/1.0em "Oswald", Arial, sans-serif;
+		font: normal 300 20px/1.0em @sans-serif-primary;
 		span {
-			font: normal 400 20px/1.0em "Oswald", Arial, sans-serif;
+			font: normal 400 20px/1.0em @sans-serif-primary;
 			color: @color-grey-1;
 		}
 		a {
-			font: normal 300 20px/1.0em "Oswald", Arial, sans-serif;
+			font: normal 300 20px/1.0em @sans-serif-primary;
 		}
 		a:link,
 		a:visited {
@@ -690,7 +669,7 @@ a:focus {
 	}
 
 	.string {
-		font: normal 300 20px/1.0em "Oswald", Arial, sans-serif;
+		font: normal 300 20px/1.0em @sans-serif-primary;
 		color: @color-grey-3;
 	}
 
@@ -721,15 +700,10 @@ a:focus {
 	text-shadow: 0 1px 1px rgba(0,0,0,0.3);
 	color: @color-grey-3; 
 }
-
 .compose {
 	margin: 0 0 20px 5px;
-	font: normal 300 16px/1.4em "Oswald", Arial, sans-serif;
+	font: normal 300 16px/1.4em @sans-serif-primary;
 	text-transform: uppercase;
-
-	// a {
-	// 	font: normal 300 20px/1.0em "Oswald", Arial, sans-serif;
-	// }
 	a:link,
 	a:visited {
 		color: @color-secondary-4-0;		
@@ -742,19 +716,6 @@ a:focus {
 	}
 }
 
-
-/* ============================================================================= 
-08.	Tweet \ Card \ Icons \ Load Characters
-================================================================================ */
-// .compose-icon:before {
-// 	content: "\f14b";
-// 	font-size: 1.25rem;
-// 	left: -5px;
-// 	top: 0px;
-// }
-
-
-
 /* ============================================================================= 
 08. URLs \ Access Denied
 ================================================================================ */
@@ -762,9 +723,6 @@ a:focus {
 	font-family: @sans-serif-primary;
 	text-align: center;
 }
-
-
-
 
 /* ============================================================================= 
 08. URLs \ Media Queries
@@ -776,10 +734,6 @@ a:focus {
 		margin: 0;
 	}
 }
-
-
-
-
 
 /* ============================================================================= 
 10. User Messages
@@ -850,9 +804,6 @@ a:focus {
   color: #D8000C;
   background-color: #FFBABA;
 }
-
-
-
 
 /* ============================================================================= 
 10. Helper Classes
