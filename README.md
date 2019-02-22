@@ -2,47 +2,57 @@
 
 ### TinyApp is a full stack web app built using Node and Express that allows users to shorten URLs.
 
+## <span style="color:#7FAF1B">Getting Started</span>
+
+1. Fork this repository, then clone your fork of this repository.
+2. Install dependencies using the `npm install` command.
+3. Start the web server using the `npm start` command. The app will be served at <http://localhost:8080/>.
+4. Go to <http://localhost:8080/> in your browser.
+
+## <span style="color:#7FAF1B">Dependencies:</span>
+
+* [bcrypt](https://github.com/kelektiv/node.bcrypt.js#read) - A library to help you hash passwords
+* [body-parser](https://github.com/expressjs/body-parser#readme) - Node.js body parsing middleware
+* [cookie-parser](https://github.com/expressjs/cookie-parser) - Parse HTTP request cookies
+* [cookie-session](https://github.com/expressjs/cookie-session#readme) - Simple cookie-based session middleware
+* [ejs](https://github.com/mde/ejs) - Embedded JavaScript templates
+* [Express](http://expressjs.com/) - Web application server framework
+
+## <span style="color:#7FAF1B">Dev Dependencies:</span>
+
+* [nodemon](https://nodemon.io/) - Monitor your source and automatically restart server
+
+
+
 ## <span style="color:#7FAF1B">Project Screenshots:</span>
 
 
 * [TinyApp Login Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Login_Page.jpg?raw=true)
+
 ![TinyApp Login Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Login_Page.jpg?raw=true)
 
-
 * [TinyApp Register Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Register_Page.jpg?raw=true)
+
 ![TinyApp Register Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Register_Page.jpg?raw=true)
 
-
 * [TinyApp Home Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Home_Page.jpg?raw=true)
+
 ![TinyApp Home Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Home_Page.jpg?raw=true)
 
+* [TinyApp Create URL Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Create_URL_Page.jpg?raw=true)
 
-[TinyApp Create URL Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Create_URL_Page.jpg?raw=true)
 ![TinyApp Create URL Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Create_URL_Page.jpg?raw=true)
 
-
 * [TinyApp Edit URL Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Edit_URL_Page.jpg?raw=true)
+
 ![TinyApp Edit URL Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Edit_URL_Page.jpg?raw=true)
 
-
 * [TinyApp Permission Denied Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Edit_URL-Error_Page.jpg?raw=true)
+
 ![TinyApp Permission Denied Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Edit_URL-Error_Page.jpg?raw=true)
 
 
-## <span style="color:#7FAF1B">Tech Stack:</span>
 
-* [Node](http://www.dropwizard.io/1.0.2/docs/) - Asynchronous event driven JavaScript runtime
-* [Express](http://expressjs.com/) - Web application server framework
-
-## <span style="color:#7FAF1B">Dependencies:</span>
-* [ejs](https://github.com/mde/ejs) - Embedded JavaScript templates
-* [bcrypt](https://github.com/kelektiv/node.bcrypt.js#read) - A library to help you hash passwords
-* [body-parser](https://github.com/expressjs/body-parser#readme) - Node.js body parsing middleware
-* [cookie-session](https://github.com/expressjs/cookie-session#readme) - Simple cookie-based session middleware
-
-
-## <span style="color:#7FAF1B">Dev Dependencies:</span>
-* [nodemon](https://nodemon.io/)
 
 ## <span style="color:#7FAF1B">Requirements:</span>
 
