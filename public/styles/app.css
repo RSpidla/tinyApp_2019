@@ -522,8 +522,7 @@ a:focus {
 }
 .edit {
   display: inline-block;
-  width: calc(100% - 0px);
-  margin: 10px 10px 10px 0;
+  margin: 10px 40px 10px 0;
   padding: 10px;
   color: #263238;
   font: normal 500 16px/1em "Oswald", Arial, sans-serif;
@@ -709,7 +708,9 @@ a:focus {
   transition: all 0.3s ease-out;
 }
 .error {
+  display: inline-block;
   margin: 0 0 20px;
+  padding: 10px 0;
   font: normal 400 18px/1.4em "Oswald", Arial, sans-serif;
   color: #D8000C;
 }
