@@ -74,15 +74,7 @@ app.get("/urls/new", (req, res) => {
 
 app.get("/u/:shortURL", (req, res) => {
   let longURL = req.params['shortURL'];
-  // console.log(urlDatabase[req.params['shortURL'].longURL]);
-  if (!longURL.includes("http://") || !longURL.includes("https://")) {
-    res.redirect("http://" + urlDatabase[req.params['shortURL'].longURL]);
-    return;
-  } else {
-    res.redirect(urlDatabase[req.params['shortURL'].longURL]);
-  }
-  // Final fix here --- returning 'undefined' here
-  // res.redirect(urlDatabase[req.params['shortURL'].longURL);
+  res.redirect(urlDatabase[req.params['shortURL']].longURL);
 })
 
 app.get("/urls/:shortURL", (req, res) => {
