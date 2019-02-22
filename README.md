@@ -31,9 +31,17 @@
 
 ![TinyApp Login Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Login_Page.jpg?raw=true)
 
+* [TinyApp Login Page - Error Message](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Login_Page-Error_Message.jpg?raw=true)
+
+![TinyApp Login Page - Error Message](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Login_Page-Error_Message.jpg?raw=true)
+
 * [TinyApp Register Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Register_Page.jpg?raw=true)
 
 ![TinyApp Register Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Register_Page.jpg?raw=true)
+
+* [TinyApp Register Page - Error Message](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Register_Page-Error_Message.jpg?raw=true)
+
+![TinyApp Register Page - Error Message](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Register_Page-Error_Message.jpg?raw=true)
 
 * [TinyApp Home Page](https://github.com/RSpidla/tinyApp_2019/blob/master/docs/TinyApp-Home_Page.jpg?raw=true)
 
