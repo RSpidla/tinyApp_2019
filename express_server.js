@@ -47,7 +47,7 @@ const users = {
    }
 }
 
-// Root URL Route
+// GET Routes
 app.get("/", (req, res) => {
   const user_id = req.session.user_id;
   if (user_id) {
@@ -58,7 +58,6 @@ app.get("/", (req, res) => {
   }
 });
 
-// New URL Route
 app.get("/urls/new", (req, res) => {
   let user_id = req.session['user_id'];
   let user = users[user_id];
@@ -73,27 +72,19 @@ app.get("/urls/new", (req, res) => {
   res.render("urls_new", templateVars);
 })
 
-// Short URL Requests Route
 app.get("/u/:shortURL", (req, res) => {
   let longURL = req.params['shortURL'];
-
-console.log(urlDatabase[req.params['shortURL'].longURL]);
-  
-
+  // console.log(urlDatabase[req.params['shortURL'].longURL]);
   if (!longURL.includes("http://") || !longURL.includes("https://")) {
     res.redirect("http://" + urlDatabase[req.params['shortURL'].longURL]);
     return;
   } else {
     res.redirect(urlDatabase[req.params['shortURL'].longURL]);
   }
-
-// Final fix here --- returning 'undefined' here
-
-
+  // Final fix here --- returning 'undefined' here
   // res.redirect(urlDatabase[req.params['shortURL'].longURL);
 })
 
-// Single and Shortened URL Route
 app.get("/urls/:shortURL", (req, res) => {
   let user_id = req.session['user_id'];
   let user = users[user_id];
@@ -109,7 +100,6 @@ app.get("/urls/:shortURL", (req, res) => {
   }
 });
 
-// URLs Route
 app.get("/urls", (req, res) => {
   let user_id = req.session['user_id'];
   let user = users[user_id];
@@ -118,7 +108,8 @@ app.get("/urls", (req, res) => {
     urls: urlDatabase,
     users,
     user,
-    usersURLS
+    usersURLS,
+    error: ''
   };
   if (!user_id) {
     return res.redirect('/login');
@@ -130,17 +121,17 @@ app.get("/urls.json", (req, res) => {
   res.json(urlDatabase);
 });
 
-// Register Route
 app.get('/register', (req, res) => {
   let user_id = req.session['user_id'];
   let user = users[user_id];
   let templateVars = {
-    user    
+    user,
+    error: ''
   }
   res.render("register", templateVars);
 });
 
-// Login
+// POST Routes
 app.get('/login', (req, res) => {
   let user_id = req.session['user_id'];
   let user = users[user_id];
@@ -151,7 +142,6 @@ app.get('/login', (req, res) => {
   res.render("login", templateVars);
 });
 
-// Delete URL Route
 app.post('/urls/:id/delete', (req, res) => {
   const currentUserID = req.session['user_id'];
   const currentURL = urlDatabase[req.params.id];
@@ -160,7 +150,8 @@ app.post('/urls/:id/delete', (req, res) => {
   }
   if (currentUserID !== currentURL.user_id) {
     let templateVars = {
-      user: users[currentUserID]
+      user: users[currentUserID],
+      error: "Login to delete URLS"
     }
     res.render('urls_denied', templateVars);
   }
@@ -170,23 +161,25 @@ app.post('/urls/:id/delete', (req, res) => {
   }
 });
 
-// Update URL Route
 app.post('/urls/:id/edit', (req, res) => {
-  const { new_longURL } = req.body;
+  const { longURL } = req.body;
   const currentUserID = req.session['user_id'];
   const currentURL = urlDatabase[req.params.id];
+    
   if (!currentUserID) {
       return res.redirect('/login');
   }
   if (currentUserID !== currentURL.userID) {
       let templateVars = {
-          user: users[currentUserID]
+          user: users[currentUserID],
+          error: "Login to edit URLS"
       }
       return res.render('urls_denied', templateVars);
   } else {
+    console.log(longURL);
     urlDatabase[req.params.id] = {
       user_id: currentUserID, 
-      longURL: new_longURL, 
+      longURL: longURL, 
       shortURL: currentUserID
     };
     res.redirect('/urls');  
@@ -206,7 +199,6 @@ function checkUser(email, password) {
     }
 }
 
-// Login Route
 app.post('/login', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -219,19 +211,17 @@ app.post('/login', (req, res) => {
       let user = users[user_id];
       let templateVars = {
         user,
-        error: "sdfgsx"
+        error: "Enter Email and Password"
       }
       res.render('login', templateVars)
   }
 });
 
-// Logout Route
 app.post('/logout', (req, res) => {
   req.session = null;
   res.status(200).redirect('/urls');
 });
 
-// Register Route
 app.post('/register', (req, res) => {
   const { email, password } = req.body;
   const hashedPassword = bcrypt.hashSync(password, 10);
@@ -246,11 +236,29 @@ app.post('/register', (req, res) => {
     }
   }
   if (!emailNotRegistered) {
-    res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong> - Email Already Registered</body></html>");
+    res.status(400);
+    let user = users[user_id];
+    let templateVars = {
+      user,
+      error: "Email Already Registered"
+    }
+    res.render('register', templateVars);
   } else if (!email || !password) {
-    res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong> - Enter Email and Password</html></body>");
+    res.status(400);
+    let user = users[user_id];
+    let templateVars = {
+      user,
+      error: "Enter Email and Password"
+    }
+    res.render('register', templateVars);
   } else if (users[user_id]) {
-    res.status(400).send("<html><body><strong>Status: 400 Bad Request</strong>");
+    res.status(400);
+    let user = users[user_id];
+    let templateVars = {
+      user,
+      error: "400 Bad Request"
+    }
+    res.render('register', templateVars);
   } else {
     users[user_id] = { user_id, email, hashedPassword };
     req.session.user_id = user_id;
@@ -258,9 +266,8 @@ app.post('/register', (req, res) => {
   }
 });
 
-// URLs Route
 app.post("/urls", (req, res) => {
-  let rng = generateRandomString();
+  const rng = generateRandomString();
   urlDatabase[rng] = {
     longURL: req.body.longURL,
     userID: req.session.user_id
@@ -268,7 +275,10 @@ app.post("/urls", (req, res) => {
   res.status(302).redirect(`/urls/${rng}`);
 });
 
-// Generate Random Number Function
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}!`);
+});
+
 function generateRandomString() {
   var result = '';
   var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -278,7 +288,6 @@ function generateRandomString() {
   return result;
 };
 
-// Return URLs of User Function
 const urlsForUser = (id, data) => {
   let usersURLS = {};
   for (let key in data) {
@@ -288,8 +297,3 @@ const urlsForUser = (id, data) => {
   }
   return usersURLS;  
 };
-
-// App Starting Message Route
-app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}!`);
-});
