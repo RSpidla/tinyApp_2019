@@ -58,45 +58,11 @@ app.get("/", (req, res) => {
   }
 });
 
-app.get("/urls/new", (req, res) => {
-  let user_id = req.session['user_id'];
-  let user = users[user_id];
-  let longURL = req.params['shortURL'];
-  let templateVars = { 
-    longURL,
-    user
-  };
-  if (!user_id) {
-    return res.redirect('/login');
-  }
-  res.render("urls_new", templateVars);
-})
-
-app.get("/u/:shortURL", (req, res) => {
-  let longURL = req.params['shortURL'];
-  res.redirect(urlDatabase[req.params['shortURL']].longURL);
-})
-
-app.get("/urls/:shortURL", (req, res) => {
-  let user_id = req.session['user_id'];
-  let user = users[user_id];
-  let templateVars = {
-    shortURL: req.params.shortURL,
-    longURL: urlDatabase[req.params.shortURL].longURL,
-    user
-  };
-  if (user_id === users[user_id]) {
-    res.render('urls_show', templateVars);
-  } else {
-    res.render('urls_show', templateVars);
-  }
-});
-
 app.get("/urls", (req, res) => {
-  let user_id = req.session['user_id'];
-  let user = users[user_id];
+  const user_id = req.session.user_id;
+  const user = users[user_id];
   const usersURLS = urlsForUser(user_id, urlDatabase);
-  let templateVars = { 
+  const templateVars = { 
     urls: urlDatabase,
     users,
     user,
@@ -109,14 +75,48 @@ app.get("/urls", (req, res) => {
   res.render("urls_index", templateVars);
 });
 
+app.get("/urls/new", (req, res) => {
+  const user_id = req.session['user_id'];
+  const user = users[user_id];
+  const longURL = req.params['shortURL'];
+  const templateVars = { 
+    longURL,
+    user
+  };
+  if (!user_id) {
+    return res.redirect('/login');
+  }
+  res.render("urls_new", templateVars);
+})
+
+app.get("/u/:shortURL", (req, res) => {
+  const longURL = req.params['shortURL'];
+  res.redirect(urlDatabase[req.params['shortURL']].longURL);
+})
+
+app.get("/urls/:shortURL", (req, res) => {
+  const user_id = req.session['user_id'];
+  const user = users[user_id];
+  const templateVars = {
+    shortURL: req.params.shortURL,
+    longURL: urlDatabase[req.params.shortURL].longURL,
+    user
+  };
+  if (user_id === users[user_id]) {
+    res.render('urls_show', templateVars);
+  } else {
+    res.render('urls_show', templateVars);
+  }
+});
+
 app.get("/urls.json", (req, res) => {
   res.json(urlDatabase);
 });
 
 app.get('/register', (req, res) => {
-  let user_id = req.session['user_id'];
-  let user = users[user_id];
-  let templateVars = {
+  const user_id = req.session['user_id'];
+  const user = users[user_id];
+  const templateVars = {
     user,
     error: ''
   }
@@ -125,9 +125,9 @@ app.get('/register', (req, res) => {
 
 // POST Routes
 app.get('/login', (req, res) => {
-  let user_id = req.session['user_id'];
-  let user = users[user_id];
-  let templateVars = {
+  const user_id = req.session['user_id'];
+  const user = users[user_id];
+  const templateVars = {
     user,
     error: ''
   }
@@ -141,7 +141,7 @@ app.post('/urls/:id/delete', (req, res) => {
     res.redirect('/login');
   }
   if (currentUserID !== currentURL.user_id) {
-    let templateVars = {
+    const templateVars = {
       user: users[currentUserID],
       error: "Login to delete URLS"
     }
@@ -162,13 +162,12 @@ app.post('/urls/:id/edit', (req, res) => {
       return res.redirect('/login');
   }
   if (currentUserID !== currentURL.userID) {
-      let templateVars = {
+      const templateVars = {
           user: users[currentUserID],
           error: "Login to edit URLS"
       }
       return res.render('urls_denied', templateVars);
   } else {
-    console.log(longURL);
     urlDatabase[req.params.id] = {
       user_id: currentUserID, 
       longURL: longURL, 
@@ -194,14 +193,14 @@ function checkUser(email, password) {
 app.post('/login', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  let user_id = checkUser(email, password);
+  const user_id = checkUser(email, password);
   if (user_id) {
     req.session.user_id = user_id;
     res.status(200).redirect('/urls');
   } else {
       res.status(403);
-      let user = users[user_id];
-      let templateVars = {
+      const user = users[user_id];
+      const templateVars = {
         user,
         error: "Enter Email and Password"
       }
@@ -229,24 +228,24 @@ app.post('/register', (req, res) => {
   }
   if (!emailNotRegistered) {
     res.status(400);
-    let user = users[user_id];
-    let templateVars = {
+    const user = users[user_id];
+    const templateVars = {
       user,
       error: "Email Already Registered"
     }
     res.render('register', templateVars);
   } else if (!email || !password) {
     res.status(400);
-    let user = users[user_id];
-    let templateVars = {
+    const user = users[user_id];
+    const templateVars = {
       user,
       error: "Enter Email and Password"
     }
     res.render('register', templateVars);
   } else if (users[user_id]) {
     res.status(400);
-    let user = users[user_id];
-    let templateVars = {
+    const user = users[user_id];
+    const templateVars = {
       user,
       error: "400 Bad Request"
     }
