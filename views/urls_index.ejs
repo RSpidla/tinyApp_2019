@@ -26,8 +26,11 @@
       <p class="compose"><a href="/urls/new" class="compose-icon" id="compose-button">Create New TinyURL</a></p>
 
       <ul class="url_list">
-          
-        <% for (let key in urls) { %>
+
+
+      <% if(user){ %>
+
+        <% for (let key in usersURLS) { %>
           <li class="url_list__url">
             
             <div class="shortURL">
@@ -48,6 +51,13 @@
           
           </li>
         <% } %>
+
+      <% } else{ %>
+        <p>PLEASE LOGIN OR REGISTER TO SEE URLS</p>
+      <% } %>
+
+
+        
 
       </ul>
 
