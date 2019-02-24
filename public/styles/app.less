@@ -3,7 +3,7 @@
 
 Description:    CSS for TinyApp Project V1.0
 Date Created:   19/02/16
-Date Updated:   19/02/17
+Date Updated:   19/02/23
 
 00. Mixins
 01. Variables
@@ -34,12 +34,11 @@ Date Updated:   19/02/17
 		└── Media Queries
 09. Compose Button
 		└── Icon
-
+10. User Messages
+		├── Icons
+		└── Colours
 
 */
-
-
-
 
 /* ==========================================================================
 00. Mixins
@@ -156,7 +155,6 @@ fieldset {
 textarea {
 	resize: vertical;
 }
-
 body.primary {
 	margin: 0 !important;
 }
@@ -179,12 +177,6 @@ body.primary {
   min-height: 100vh;
   margin: 0;
 	padding: 0;
-	// background: url("/images/duotone.png") no-repeat center center fixed;
-	// background: #f7f7f7;
-	
-	// min-height: 100vh;
-	// padding: 0;
-	// margin: 0 !important;
 	background: url("/images/duotone.png");
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -329,7 +321,6 @@ a:focus {
   background-color: white;
   -webkit-box-shadow: 1px 2px 4px 0 rgba(0,0,0,.15);
 	box-shadow: 1px 2px 4px 0 rgba(0,0,0,.15);
-	
 	.header-form {
 		display: inline-block;
 		width: 50%;
@@ -443,10 +434,6 @@ a:focus {
 			}
 	}
 }
-// .logout_form:hover,
-// .logout_form:focus {
-	
-// }
 
 /* ============================================================================= 
 05. Header \ Media Queries
@@ -500,7 +487,6 @@ a:focus {
   }
 }
 
-
 /* ============================================================================= 
 06. Main \ Form Elements
 ================================================================================ */
@@ -530,20 +516,9 @@ a:focus {
 		cursor: pointer;
 	}
 	input[type=submit].btn__delete {
-		// display: block;
-		// width: ~"calc(100% - 0px)";
-		// margin: 10px 10px 10px 0;
-		// padding: 10px;
-		// color: @color-grey-1;
-		// font: normal 500 16px/1em @sans-serif-primary;
-		// text-transform: uppercase;
-		// cursor: pointer;
-width: 100px;
-max-width: 120px;
-padding: 10px;
-
-
-
+		width: 100px;
+		max-width: 120px;
+		padding: 10px;
 	}
 	ul {
 		display: inline-block;
@@ -612,25 +587,11 @@ padding: 10px;
 07. Button \ Edit
 ================================================================================ */
 .btn.btn__edit {
+	float: left;
 	display: inline-block;
 	margin: 10px 20px 10px 0;
-
-
-
-	float: left;
-
 	padding: 10px;
-	// width: auto;
-
 }
-
-
-
-
-
-
-
-
 
 /* ============================================================================= 
 08. URLs
@@ -695,7 +656,6 @@ padding: 10px;
 		width: 0;
 		background: @color-grey-1;
 	}
-
 }
 
 /* ============================================================================= 
@@ -759,8 +719,6 @@ padding: 10px;
 	max-width: 80px;
 }
 
-
-
 /* ============================================================================= 
 08. URLs \ Access Denied
 ================================================================================ */
@@ -798,7 +756,6 @@ padding: 10px;
 		text-decoration: none;
 	}
 }
-
 #compose-button {
 	display: inline-block;
 	margin: 20px 0 0;

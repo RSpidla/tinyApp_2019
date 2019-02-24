@@ -2,7 +2,7 @@
 
 Description:    CSS for TinyApp Project V1.0
 Date Created:   19/02/16
-Date Updated:   19/02/17
+Date Updated:   19/02/23
 
 00. Mixins
 01. Variables
@@ -33,7 +33,9 @@ Date Updated:   19/02/17
 		└── Media Queries
 09. Compose Button
 		└── Icon
-
+10. User Messages
+		├── Icons
+		└── Colours
 
 */
 /* ==========================================================================
@@ -558,9 +560,9 @@ a:focus {
 07. Button \ Edit
 ================================================================================ */
 .btn.btn__edit {
+  float: left;
   display: inline-block;
   margin: 10px 20px 10px 0;
-  float: left;
   padding: 10px;
 }
 /* ============================================================================= 
