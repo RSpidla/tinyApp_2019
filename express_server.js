@@ -58,22 +58,22 @@ app.get("/", (req, res) => {
   }
 });
 
-app.get("/urls", (req, res) => {
-  const user_id = req.session.user_id;
-  const user = users[user_id];
-  const usersURLS = urlsForUser(user_id, urlDatabase);
-  const templateVars = { 
-    urls: urlDatabase,
-    users,
-    user,
-    usersURLS,
-    error: ''
-  };
-  if (!user_id) {
-    return res.redirect('/login');
-  }
-  res.render("urls_index", templateVars);
-});
+// app.get("/urls", (req, res) => {
+//   const user_id = req.session.user_id;
+//   const user = users[user_id];
+//   const usersURLS = urlsForUser(user_id, urlDatabase);
+//   const templateVars = { 
+//     urls: urlDatabase,
+//     users,
+//     user,
+//     usersURLS,
+//     error: ''
+//   };
+//   if (!user_id) {
+//     return res.redirect('/login');
+//   }
+//   res.render("urls_index", templateVars);
+// });
 
 app.get("/urls/new", (req, res) => {
   const user_id = req.session['user_id'];
@@ -109,6 +109,24 @@ app.get("/urls/:shortURL", (req, res) => {
   }
 });
 
+
+app.get("/urls", (req, res) => {
+  const user_id = req.session.user_id;
+  const user = users[user_id];
+  const usersURLS = urlsForUser(user_id, urlDatabase);
+  const templateVars = { 
+    urls: urlDatabase,
+    users,
+    user,
+    usersURLS,
+    error: ''
+  };
+  if (!user_id) {
+    return res.redirect('/login');
+  }
+  res.render("urls_index", templateVars);
+});
+
 app.get("/urls.json", (req, res) => {
   res.json(urlDatabase);
 });
@@ -135,45 +153,40 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/urls/:id/delete', (req, res) => {
-  const currentUserID = req.session['user_id'];
-  const currentURL = urlDatabase[req.params.id];
+  const { id } = req.params;
+  const currentUserID = req.session.user_id;
   if (!currentUserID) {
     res.redirect('/login');
   }
-  if (currentUserID !== currentURL.user_id) {
+  if (currentUserID === urlDatabase[id].userID) {
+    delete urlDatabase[id];
+    res.redirect('/urls');
+  } 
+  else {
     const templateVars = {
       user: users[currentUserID],
       error: "Login to delete URLS"
     }
     res.render('urls_denied', templateVars);
   }
-  else {
-    delete urlDatabase[req.params.id];
-    res.redirect('/urls');
-  }
 });
 
 app.post('/urls/:id/edit', (req, res) => {
-  const { longURL } = req.body;
   const currentUserID = req.session['user_id'];
-  const currentURL = urlDatabase[req.params.id];
-    
+  const { id } = req.params;
+  const { longURL } = req.body;  
   if (!currentUserID) {
-      return res.redirect('/login');
+    return res.redirect('/login');
   }
-  if (currentUserID !== currentURL.userID) {
-      const templateVars = {
-          user: users[currentUserID],
-          error: "Login to edit URLS"
-      }
-      return res.render('urls_denied', templateVars);
+  if (currentUserID === urlDatabase[id].userID) {
+    urlDatabase[id]['longURL'] = longURL;
+    res.redirect('/urls');
   } else {
-    urlDatabase[req.params.id] = {
-      user_id: currentUserID, 
-      longURL: longURL, 
-      shortURL: currentUserID
-    };
-    res.redirect('/urls');  
+    const templateVars = {
+      user: users[currentUserID],
+      error: "Login to edit URLS"
+    }
+    return res.render('urls_denied', templateVars);
   }
 });
 
@@ -185,7 +198,6 @@ function checkUser(email, password) {
         bcrypt.compareSync(password, hashedPassword)
       ) {
         return user_id;
-        
       }
     }
 }
