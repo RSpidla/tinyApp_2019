@@ -1,0 +1,31 @@
+.primary__footer {
+  background-color: white;
+  -webkit-box-shadow: 1px -2px 4px 0 rgba(0,0,0,.15);
+  box-shadow: 1px -2px 4px 0 rgba(0,0,0,.15);
+  color: $color-grey-1;
+}
+.copyright {
+  display: inline-block;
+  padding: 20px;
+  font: 500 14px/20px $sans-serif-primary;
+  text-transform: uppercase;
+  a:visited {
+    color: $color-grey-1; 
+  }
+  a:hover,
+  a:focus {
+    color: $color-secondary-4-0;
+  }
+}
+@media only screen and (max-width: 599px) {
+  .copyright {
+    width: calc(100% - 20px);
+    padding: 20px 10px 0;
+    text-align: center;
+  }
+}
+@media only screen and (max-width: 379px) {
+  .copyright {
+    font-size: 12px;
+  }
+}
