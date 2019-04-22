@@ -1,0 +1,32 @@
+.compose {
+	margin: 0 0 20px 5px;
+	font: normal 300 16px/1.4em $sans-serif-primary;
+	text-transform: uppercase;
+	a:link,
+	a:visited {
+		color: $color-secondary-4-0;		
+		text-decoration: none;
+	}
+	a:hover,
+	a:focus {
+		color: $color-grey-1;  
+		text-decoration: none;
+	}
+}
+#compose-button {
+	display: inline-block;
+	margin: 20px 0 0;
+}
+.compose-icon:before {
+	position: relative;
+	top: -1.25px;
+	left: -5px;
+	content: "\f14b"; 
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	text-decoration: inherit;
+	font-size: 1.125rem;
+	text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+	color: $color-grey-3; 
+}
