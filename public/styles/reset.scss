@@ -1,0 +1,44 @@
+html,
+button,
+input,
+select,
+textarea {
+	color: $color-grey-1;
+}
+html {
+	font-size: 100%;
+	line-height: 1.4em;
+}
+::-moz-selection {
+	background: #b3d4fc;
+	text-shadow: none;
+}
+::selection {
+	background: #b3d4fc;
+	text-shadow: none;
+}
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid white;
+	margin: 40px 0 20px;
+	padding: 0;
+}
+audio,
+canvas,
+img,
+video {
+	vertical-align: middle;
+}
+fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+textarea {
+	resize: vertical;
+}
+body.primary {
+	margin: 0 !important;
+}
